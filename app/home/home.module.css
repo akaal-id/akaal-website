@@ -1,0 +1,7 @@
+.pageContent {
+  position: relative;
+  z-index: 1;
+  background: #000000;
+  /* Exact match to fixed footer height — native curtain reveal */
+  margin-bottom: var(--footer-height);
+}

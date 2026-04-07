@@ -1,0 +1,82 @@
+/* ── Infinite typographic marquee ── */
+
+.section {
+  position: relative;
+  z-index: 25;
+  width: 100%;
+  overflow: hidden;
+  background: var(--background);
+  padding: 8vw 0;
+}
+
+.line {
+  width: 100%;
+  overflow: hidden;
+}
+
+.line + .line {
+  margin-top: 0.04em;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Duplicate segments: animate -50% for seamless loop */
+.trackToRight {
+  animation: marquee-right var(--marquee-duration, 400s) linear infinite;
+}
+
+.trackToLeft {
+  animation: marquee-left var(--marquee-duration, 400s) linear infinite;
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.segment {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 12vw, 6vw);
+  font-weight: 200;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  /* text-transform: uppercase; */
+  white-space: nowrap;
+  padding-right: 0.15em;
+}
+
+/* Line 1: hollow outline */
+.outline {
+  color: var(--foreground);
+}
+
+/* Line 2: solid */
+.solid {
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trackToRight,
+  .trackToLeft {
+    animation: none;
+    transform: translateX(0);
+  }
+}

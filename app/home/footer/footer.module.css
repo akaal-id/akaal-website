@@ -1,0 +1,163 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  height: var(--footer-height);
+  display: flex;
+  flex-direction: column;
+  background: #050505;
+  overflow-x: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: auto;
+
+  
+}
+
+.footerTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px 32px;
+  padding: 22px clamp(20px, 4vw, 56px) 18px;
+  flex-shrink: 0;
+}
+
+.footerBrand {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+/* Same asset + filters as navbar (.logoImage + .logoShadow), merged for one filter stack */
+.brandLogoLink {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.footerLogo {
+  height: 32px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  filter: grayscale(1) brightness(4) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+@media (max-width: 768px) {
+  .footerLogo {
+    filter: grayscale(1) brightness(4) drop-shadow(0 3px 7px rgba(0, 0, 0, 0.28))
+      drop-shadow(0 2px 3px rgba(0, 0, 0, 0.18));
+  }
+}
+
+.footerSocial {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 0;
+  pointer-events: auto;
+}
+
+.socialList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.socialLink {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.42);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.72;
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.socialLink:hover {
+  color: rgba(255, 255, 255, 0.98);
+  opacity: 1;
+}
+
+.socialLink:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.45);
+  outline-offset: 3px;
+}
+
+/* Foundational glow — strongest when main has scrolled away */
+.footerMid {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  pointer-events: none;
+}
+
+.footerGlow {
+  position: absolute;
+  inset: 0;
+  top: -12%;
+  background: radial-gradient(
+    ellipse 95% 85% at 50% 100%,
+    color-mix(in srgb, var(--deep-blue) 52%, transparent) 0%,
+    transparent 62%
+  );
+  filter: blur(56px);
+  opacity: 0.55;
+  z-index: 0;
+}
+
+.footerBottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 16px clamp(20px, 4vw, 56px) 22px;
+  flex-shrink: 0;
+}
+
+.copyright {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+@media (max-width: 767px) {
+  .footerTop {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footerSocial {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .socialList {
+    justify-content: flex-start;
+  }
+}

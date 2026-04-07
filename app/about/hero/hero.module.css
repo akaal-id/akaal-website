@@ -1,0 +1,27 @@
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(120px, 18vh, 200px) 48px clamp(64px, 10vh, 96px);
+  background: var(--background);
+  border-bottom: 1px solid var(--dark-grey);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1023px) {
+  .hero {
+    padding: 112px 32px 56px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 96px 16px 48px;
+  }
+}

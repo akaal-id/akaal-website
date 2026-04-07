@@ -1,0 +1,301 @@
+/* ── Newsroom · Editorial Card Grid ── */
+
+.newsroom {
+  position: relative;
+  z-index: 30;
+  background: var(--background);
+  padding: 20vh 48px;
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ── Section Header (matches ecosystem / services) ── */
+
+.header {
+  margin-bottom: 48px;
+  max-width: 1440px;
+  margin: auto auto 48px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  max-width: 760px;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 1.3vw, 48px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #f4f4f4;
+  margin: 0;
+}
+
+/* ── 3-Column Grid ── */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 2vw;
+}
+
+/* ── Card ── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--background);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardWide {
+  grid-column: span 2;
+}
+
+.card:hover {
+  border-color: var(--purple);
+}
+
+/* ── CTA Card ── */
+
+.cardCta {
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  background: transparent;
+}
+
+.cardCta:hover {
+  border-color: var(--purple);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.ctaInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 24px;
+}
+
+.ctaText {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.4s ease;
+}
+
+.cardCta:hover .ctaText {
+  color: var(--white);
+}
+
+.ctaArrow {
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  rotate: -45deg;
+  transition:
+    color 0.4s ease,
+    rotate 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardCta:hover .ctaArrow {
+  color: var(--purple);
+  rotate: 0deg;
+}
+
+/* ── Card Media ── */
+
+.cardMediaWrap {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.3) brightness(0.8);
+  transform: scale(1);
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .cardImage {
+  transform: scale(1.05);
+  filter: saturate(1) brightness(1);
+}
+
+/* ── Card Content ── */
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: clamp(20px, 1.5vw, 28px);
+  gap: 16px;
+}
+
+/* ── Meta Row ── */
+
+.cardMeta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+/* ── Headline ── */
+
+.cardHeadline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.4vw, 22px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Wide (big) card: single-line title */
+.cardWide .cardHeadline {
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+
+/* Small (single-column) article card: two-line title */
+.card:not(.cardWide):not(.cardCta) .cardHeadline {
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* ── Action Row ── */
+
+.cardAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cardActionText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  transition: color 0.4s ease;
+}
+
+.card:hover .cardActionText {
+  color: var(--foreground);
+}
+
+.cardActionArrow {
+  font-size: 16px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.2);
+  transition:
+    color 0.4s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .cardActionArrow {
+  color: var(--purple);
+  transform: translate(4px, -4px);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1023px) {
+  .newsroom {
+    padding: 12vh 32px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .cardWide {
+    grid-column: span 2;
+  }
+
+  .cardCta {
+    grid-column: span 2;
+    order: 10;
+  }
+
+  .cardMediaWrap {
+    height: 200px;
+  }
+}
+
+@media (max-width: 767px) {
+  .newsroom {
+    padding: 10vh 16px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cardWide {
+    grid-column: span 1;
+  }
+
+  .cardCta {
+    grid-column: span 1;
+    order: 10;
+  }
+
+  .cardMediaWrap {
+    height: 200px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cardImage,
+  .cardActionText,
+  .cardActionArrow {
+    transition: none;
+  }
+}

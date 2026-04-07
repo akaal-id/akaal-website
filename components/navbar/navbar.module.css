@@ -1,0 +1,458 @@
+.logoShadow {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+@media (max-width: 768px) {
+  .logoShadow {
+    filter: drop-shadow(0 3px 7px rgba(0, 0, 0, 0.28)) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.18));
+  }
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 400px 1fr;
+  padding: 24px 16px 4px;
+}
+
+.mainContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.mainGroup {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.navBlock {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: hsl(var(--card) / 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 4px;
+  padding: 0 20px;
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.homeLink {
+  color: inherit;
+}
+
+.menuButton {
+  inline-size: 16px;
+  block-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.startButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.startButton {
+  height: 48px;
+  width: fit-content;
+  padding: 0 20px;
+  border: 0;
+  background: var(--purple);
+  appearance: none;
+  border-radius: 4px;
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  box-shadow: inset 0 6px 10px rgb(255 255 255 / 0.25);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.startButton:hover {
+  box-shadow: inset 0 -10px 10px rgb(255 255 255 / 0.25);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 400px;
+  border-radius: 4px;
+  background-color: hsl(var(--card) / 0.8);
+  backdrop-filter: blur(20px);
+  padding: 10px 20px 20px;
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  z-index: 60;
+}
+
+.dropdownMainLinks {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #202020;
+}
+
+.dropdownRow::after,
+.dropdownRowMuted::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--white);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 240ms ease;
+}
+
+.dropdownRow:hover::after,
+.dropdownRowMuted:hover::after {
+  transform: scaleX(1);
+}
+
+.dropdownSplit {
+  gap: 20px;
+  border-bottom: 1px solid #202020;
+}
+
+.rowIcons {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ecosystemToggle {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 1px solid #202020;
+}
+
+.submenuWrap {
+  overflow: hidden;
+}
+
+.dropdownRowMuted {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #202020;
+  color: rgb(244 244 244 / 0.2);
+  gap: 9px;
+}
+
+.submenuButton {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 1px solid #202020;
+}
+
+.rowArrow {
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  transform: translateX(-4px);
+}
+
+.dropdownRow:hover .rowArrow,
+.dropdownRowMuted:hover .rowArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.submenuButton .rowArrow {
+  color: var(--white);
+}
+
+.dropdownRowAccent {
+  color: var(--white);
+}
+
+.dropdownMeta {
+  display: flex;
+  align-items: flex-start;
+  color: rgb(244 244 244 / 0.4);
+}
+
+.dropdownMetaItem:hover{
+  color: var(--white);
+  transition: color 0.2s ease-in-out;
+  transform: scaleX(1);
+}
+
+.dropdownMetaCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dropdownMetaItem {
+  font-weight: 600;
+}
+
+.dropdownStart {
+  align-self: stretch;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 12px;
+  border: 0;
+  appearance: none;
+  border-radius: 4px;
+  background-color: var(--black);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+
+.dropdownStartIcon {
+  transition: transform 200ms ease;
+}
+
+.dropdownStart:hover .dropdownStartIcon {
+  transform: rotate(45deg);
+}
+
+.startButton:hover .dropdownStartIcon {
+  transform: rotate(45deg);
+}
+
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  width: 128px;
+}
+
+.logoImage {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(1) brightness(4);
+}
+
+.iconSm {
+  inline-size: 16px;
+  block-size: 16px;
+  transition: transform 200ms ease;
+}
+
+.iconRotated {
+  transform: rotate(45deg);
+}
+
+.iconCloseSm {
+  inline-size: 16px;
+  block-size: 16px;
+}
+
+
+.contactModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.contactModalCard {
+  position: relative;
+  background-color: hsl(var(--card));
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  min-width: 320px;
+  max-width: 448px;
+  margin-inline: 16px;
+}
+
+.contactModalCloseButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 200ms ease;
+}
+
+.contactModalCloseButton:hover {
+  background-color: hsl(var(--accent));
+}
+
+.contactModalTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: hsl(var(--primary));
+  margin-bottom: 8px;
+}
+
+.contactModalSubtitle {
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.contactModalButtonsWrap {
+  width: 100%;
+}
+
+.contactModalButtonsWrap > * + * {
+  margin-top: 12px;
+}
+
+.whatsAppLink {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: #22c55e;
+  color: var(--white);
+  font-weight: 600;
+  transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.whatsAppLink:hover {
+  background-color: #16a34a;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+}
+
+.emailLink {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  font-weight: 600;
+  transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.emailLink:hover {
+  background-color: hsl(var(--primary) / 0.9);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+}
+
+@media (min-width: 640px) {
+  .navbar {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 12px 12px 16px;
+  }
+
+  .startButton{
+    display: none;
+  }
+
+  .mainContainer{
+    width: 200px;
+  }
+
+  .navBlock{
+    width: fit-content;
+  }
+
+  .dropdown{
+    width: calc(100vw - 32px);
+    top: calc(100% + 10px);
+  }
+
+  .dropdownRow{
+    font-size: 14px;
+  }
+
+  .submenuButton{
+    font-size: 14px;
+  }
+
+  .dropdownMetaItem{
+    font-size: 12px;
+  }
+}
+

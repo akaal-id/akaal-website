@@ -1,0 +1,50 @@
+.mainContainer {
+  position: relative;
+  z-index: 30;
+  width: 100%;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+  overflow: hidden;
+  background: var(--black);
+  padding: 24px 0;
+}
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 28px;
+  padding: 12px 0;
+  animation: sponsorMarquee 240s linear infinite;
+  background-color: var(--black);
+}
+
+.logo {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  flex: 0 0 auto;
+  filter: grayscale(1) invert(1) brightness(1.2);
+  opacity: 1;
+  user-select: none;
+}
+
+@keyframes sponsorMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

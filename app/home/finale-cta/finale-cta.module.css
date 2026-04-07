@@ -1,0 +1,279 @@
+/* ── Architectural Gateway — monumental close-out CTA ── */
+
+.section {
+  position: relative;
+  z-index: 25;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(48px, 8vh, 96px) clamp(24px, 5vw, 80px);
+  background: #050505;
+  overflow: hidden;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: min(1200px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(40px, 7vh, 72px);
+}
+
+.headline {
+  margin: 0;
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.25rem, 7.5vw, 5.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+  text-align: left;
+}
+
+.headlineWord {
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 0.22em;
+  vertical-align: top;
+}
+
+.headlineWord:last-child {
+  margin-right: 0;
+}
+
+.headlineInner {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.magneticZone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 56px 72px;
+  margin: -56px -72px;
+  cursor: none;
+}
+
+/* Architectural assembly: frame + glass inner + 3D accent */
+.assembly {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: clamp(28px, 4vw, 40px) clamp(36px, 5vw, 52px);
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  will-change: transform;
+  transition: transform var(--transition-fast);
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.assembly:hover .frame {
+  transform: scale(1.035);
+  border-color: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 48px rgba(138, 43, 226, 0.12);
+}
+
+.innerGlass {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 8px 8px 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* Floating purple polyhedron (CSS 3D cube) */
+.cubeStage {
+  perspective: 420px;
+  perspective-origin: 50% 45%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cube {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  transform-style: preserve-3d;
+  animation: cube-drift 14s ease-in-out infinite;
+  transition: filter var(--transition-smooth);
+}
+
+.assembly:hover .cube {
+  filter:
+    drop-shadow(0 0 22px rgba(138, 43, 226, 0.95))
+    drop-shadow(0 0 48px rgba(138, 43, 226, 0.65));
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  border: 1px solid color-mix(in srgb, var(--akaal-purple) 55%, transparent);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--akaal-purple) 88%, #000) 0%,
+    color-mix(in srgb, var(--akaal-purple) 45%, #0a0a12) 100%
+  );
+  opacity: 0.92;
+}
+
+.face:nth-child(1) {
+  transform: rotateY(0deg) translateZ(16px);
+}
+.face:nth-child(2) {
+  transform: rotateY(180deg) translateZ(16px);
+}
+.face:nth-child(3) {
+  transform: rotateY(90deg) translateZ(16px);
+}
+.face:nth-child(4) {
+  transform: rotateY(-90deg) translateZ(16px);
+}
+.face:nth-child(5) {
+  transform: rotateX(90deg) translateZ(16px);
+}
+.face:nth-child(6) {
+  transform: rotateX(-90deg) translateZ(16px);
+}
+
+@keyframes cube-drift {
+  0%,
+  100% {
+    transform: rotateX(-18deg) rotateY(-22deg);
+  }
+  50% {
+    transform: rotateX(12deg) rotateY(18deg);
+  }
+}
+
+.ctaLink {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 2px 0;
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  text-decoration: none;
+  cursor: none;
+  transition: color var(--transition-fast);
+}
+
+.ctaLink:hover {
+  color: #ffffff;
+}
+
+.ctaLink:focus-visible {
+  outline: 1px solid var(--akaal-purple);
+  outline-offset: 6px;
+}
+
+/* Custom cursor: large transparent purple ring + READY? */
+.customCursor {
+  position: fixed;
+  z-index: 9999;
+  width: 132px;
+  height: 132px;
+  margin-left: -66px;
+  margin-top: -66px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--akaal-purple) 55%, transparent);
+  background: rgba(138, 43, 226, 0.06);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: color-mix(in srgb, var(--akaal-purple) 85%, #fff);
+  opacity: 0;
+  transform: scale(0.92);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+  will-change: transform, opacity;
+}
+
+.customCursor[data-active="true"] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cube {
+    animation: none;
+    transform: rotateX(-12deg) rotateY(-18deg);
+  }
+
+  .assembly:hover .frame {
+    transform: none;
+  }
+
+  .magneticZone {
+    cursor: pointer;
+  }
+
+  .ctaLink {
+    cursor: pointer;
+  }
+
+  .customCursor {
+    display: none;
+  }
+}
