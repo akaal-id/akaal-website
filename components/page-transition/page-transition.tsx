@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import styles from "./page-transition.module.css";
 
@@ -17,7 +17,6 @@ const CELL_SIZE = 56;
 export default function PageTransition() {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -163,7 +162,7 @@ export default function PageTransition() {
 
       const url = new URL(href, window.location.origin);
       if (url.origin !== window.location.origin) return;
-      const currentUrl = `${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+      const currentUrl = `${window.location.pathname}${window.location.search}`;
       const nextUrl = `${url.pathname}${url.search}`;
       if (nextUrl === currentUrl) return;
 
@@ -183,7 +182,7 @@ export default function PageTransition() {
     return () => {
       document.removeEventListener("click", onDocumentClick, true);
     };
-  }, [pathname, router, searchParams]);
+  }, [pathname, router]);
 
   useEffect(() => {
     if (!stateRef.current.pendingHref) return;
@@ -194,7 +193,7 @@ export default function PageTransition() {
         resolveRouteReady();
       });
     });
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   useEffect(
     () => () => {
