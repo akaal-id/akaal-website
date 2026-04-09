@@ -146,7 +146,7 @@ export default function Navbar() {
                 <div className={styles.dropdownMeta}>
                   <div className={styles.dropdownMetaCol}>
                     <Link href="/stories" className={styles.dropdownMetaItem}>News</Link>
-                    <Link href="/work" className={styles.dropdownMetaItem}>Portofolio</Link>
+                    <Link href="/portofolio" className={styles.dropdownMetaItem}>Portofolio</Link>
                   </div>
                   <div className={styles.dropdownMetaCol}>
                     <a href="tel:+62817314245" className={styles.dropdownMetaItem}>[+62] 817 314 245</a>

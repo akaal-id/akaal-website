@@ -4,7 +4,7 @@
   position: relative;
   z-index: 30;
   background: var(--background);
-  padding: 20vh 0;
+  padding: var(--section-pad-y) 0;
   border-bottom: var(--dark-grey) 1px solid;
 }
 
@@ -51,7 +51,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  padding: 0 12px;
+  padding: 0;
 }
 
 /* ── Card ── */
@@ -188,7 +188,7 @@
 
 @media (max-width: 1023px) {
   .projects {
-    padding: 12vh 32px;
+    padding: var(--section-pad-y) var(--container-pad-x);
   }
 
   .grid {
@@ -206,7 +206,7 @@
 
 @media (max-width: 767px) {
   .projects {
-    padding: 10vh 16px;
+    padding: var(--section-pad-y) var(--container-pad-x);
   }
 
   .header {

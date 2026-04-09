@@ -6,7 +6,7 @@
   width: 100%;
   overflow: hidden;
   background: var(--background);
-  padding: 8vw 0;
+  padding: clamp(48px, 8vw, 120px) var(--container-pad-x);
 }
 
 .line {
@@ -78,5 +78,21 @@
   .trackToLeft {
     animation: none;
     transform: translateX(0);
+  }
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding: var(--section-pad-y) var(--container-pad-x);
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: var(--section-pad-y) var(--container-pad-x);
+  }
+
+  .segment {
+    font-size: clamp(2.5rem, 14vw, 4rem);
   }
 }

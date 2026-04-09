@@ -47,11 +47,20 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className={styles.hero} aria-label="About">
+      <div className={styles.heroGridBackground} aria-hidden="true" />
       <div className={styles.grid}>
         <span className={shared.label}>{ABOUT_LABEL}</span>
         <p ref={textRef} className={shared.statement}>
           {ABOUT_STATEMENT_LEAD}{" "}
           <em className={shared.emphasisWord}>{ABOUT_STATEMENT_EMPHASIS}</em>
+        </p>
+      </div>
+      <div className={styles.subWrapper}>
+        <p className={styles.subText}>
+          We build trust and strengthen brand identity. By combining cutting-edge technology with
+          creative innovation, we enhance the effectiveness and reach of transformative campaigns.
+          Our commitment to understanding each unique need ensures that every solution we deliver
+          creates real impact, resonates with your audience, and drives sustainable growth.
         </p>
       </div>
     </section>

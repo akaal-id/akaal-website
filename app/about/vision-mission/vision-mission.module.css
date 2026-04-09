@@ -1,34 +1,65 @@
 .section {
   position: relative;
   z-index: 1;
-  padding: clamp(72px, 14vh, 140px) 48px;
   background: var(--background);
   border-bottom: 1px solid var(--dark-grey);
   overflow-x: hidden;
 }
 
 .inner {
-  max-width: 1440px;
+  
   margin: 0 auto;
 }
 
 .labelVision {
-  margin: 0 0 16px;
+  /* margin: 0 0 24px; */
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
-  color: #555;
+  color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
   letter-spacing: 0.14em;
+  margin: 24px auto;
 }
 
 .visionBlock {
-  margin-bottom: clamp(40px, 6vw, 64px);
+  padding: var(--section-pad-y) var(--container-pad-x);
+  gap: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  isolation: isolate;
+}
+
+.visionBlock::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(5, 5, 5, 0.78) 0%,
+    rgba(5, 5, 5, 0.56) 45%,
+    rgba(5, 5, 5, 0.7) 100%
+  );
+  z-index: 0;
+}
+
+.visionBlock > * {
+  position: relative;
+  z-index: 1;
 }
 
 .pullquoteWrap {
   position: relative;
-  max-width: min(52ch, 100%);
+  max-width: 1440px;
+
+  margin: 0 auto;
 }
 
 .pullquoteGlow {
@@ -47,11 +78,34 @@
   filter: blur(24px);
 }
 
+.pullquoteGlo {
+  position: absolute;
+  left: -80px;
+  top: -40px;
+  width: min(480px, 90vw);
+  height: 200px;
+  opacity: 0.12;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at left center,
+    rgba(45, 212, 191, 0.6) 0%,
+    transparent 70%
+  );
+  filter: blur(24px);
+}
+
 .pullquote {
   position: relative;
   margin: 0;
   padding: 0 0 0 20px;
-  border-left: 3px solid var(--akaal-purple);
+  border-left: 1px solid rgba(138, 43, 226, 0.5);
+}
+
+.pullquot {
+  position: relative;
+  margin: 0;
+  padding: 0 20px 0 0px;
+  border-right: 1px solid rgba(45, 212, 191, 0.6);
 }
 
 .pullquote p {
@@ -62,51 +116,48 @@
   line-height: 1.28;
   letter-spacing: -0.04em;
   color: var(--white);
+  max-width: 29ch;
 }
 
-.bleedBand {
-  position: relative;
-  height: min(32vh, 360px);
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  overflow: hidden;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
+.pullquot p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.8vw, 24px);
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  max-width: 36ch;
 
-.bandImage {
-  object-fit: cover;
-  object-position: center;
-}
-
-.bandScrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(5, 5, 5, 0.75) 0%,
-    rgba(5, 5, 5, 0.45) 45%,
-    rgba(5, 5, 5, 0.65) 100%
-  );
-  pointer-events: none;
+  text-align: right;
 }
 
 .missionBlock {
-  padding-top: clamp(48px, 8vw, 80px);
+  padding: var(--section-pad-y) var(--container-pad-x);
+  margin: 0 auto;
+  background: transparent;
+}
+
+.missiongrid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  gap: clamp(24px, 3vw, 40px);
+  align-items: start;
 }
 
 .labelMission {
-  margin: 0 0 12px;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
-  color: #555;
+  color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(45, 212, 191, 0.35);
-  display: inline-block;
-  min-width: min(100%, 280px);
+  margin: 24px auto;
+
+  text-align: right;
 }
 
 .missionHeader {
@@ -115,77 +166,145 @@
 
 .missionLead {
   margin: 20px 0 0;
-  font-family: var(--font-display);
+  font-family: "Inter", sans-serif;
   font-size: clamp(18px, 2vw, 24px);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.35;
-  letter-spacing: -0.03em;
-  color: rgba(244, 244, 244, 0.96);
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.72);
   max-width: 48ch;
 }
 
 .missionList {
   list-style: none;
-  margin: 32px 0 0;
+  margin: 0;
   padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .missionRow {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 280ms ease, border-left-color 280ms ease;
+  border-left: 2px solid transparent;
+}
+
+.missionRowActive {
+  background: rgba(255, 255, 255, 0.04);
+  border-left-color: var(--akaal-purple);
+}
+
+.missionTrigger {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: clamp(18px, 2.2vw, 24px) 0;
+  text-align: left;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 20px 28px;
-  align-items: start;
-  padding: 22px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 16px;
+  align-items: baseline;
 }
 
-.missionList .missionRow:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.missionNum {
+.missionIndex {
+  margin-top: 1px;
   font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--teal);
-  padding-top: 3px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.1em;
 }
 
 .missionTitle {
-  margin: 0 0 8px;
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 600;
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 280ms ease;
+}
+
+.missionRowActive .missionTitle {
   color: var(--white);
 }
 
+.missionBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 280ms ease;
+}
+
+.missionBodyOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
 .missionSub {
+  min-height: 0;
+  overflow: hidden;
   margin: 0;
-  font-family: var(--font-serif);
-  font-size: 15px;
-  line-height: 1.55;
-  color: rgba(180, 180, 188, 0.92);
-  max-width: 62ch;
+  padding: 0 0 22px 32px;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.76);
+  max-width: 72ch;
+}
+
+@media (max-width: 1024px) {
+  .visionBlock {
+    padding: var(--section-pad-y) var(--container-pad-x);
+    gap: 36px;
+  }
+
+  .pullquote {
+    padding-left: 16px;
+  }
+
+  .pullquote p {
+    max-width: 30ch;
+  }
+
+  .missionSub {
+    padding-left: 28px;
+  }
 }
 
 @media (max-width: 767px) {
-  .section {
-    padding: 56px 16px 72px;
+  .missionBlock {
+    padding: var(--section-pad-y) var(--container-pad-x);
   }
 
-  .bleedBand {
-    height: min(28vh, 240px);
+  .visionBlock {
+    padding: var(--section-pad-y) var(--container-pad-x);
+    gap: 28px;
   }
 
-  .missionRow {
-    grid-template-columns: 1fr;
-    gap: 8px;
+  .labelVision {
+    margin: 14px auto;
+    font-size: 11px;
+    letter-spacing: 0.12em;
   }
 
-  .missionNum {
-    padding-top: 0;
+  .pullquote {
+    padding-left: 12px;
+  }
+
+  .pullquote p {
+    max-width: 100%;
+    font-size: clamp(20px, 7vw, 28px);
+    line-height: 1.35;
+  }
+
+  .missionTrigger {
+    gap: 12px;
+  }
+
+  .missionSub {
+    padding-left: 24px;
   }
 }

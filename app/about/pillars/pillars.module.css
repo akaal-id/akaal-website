@@ -1,18 +1,19 @@
 .pillars {
   position: relative;
   z-index: 1;
-  padding: 0 48px 20vh;
+  padding: 48px var(--container-pad-x) 144px;
   background: var(--background);
+  border-bottom: 1px solid var(--dark-grey);
 }
 
 @media (max-width: 1023px) {
   .pillars {
-    padding: 0 32px 12vh;
+    padding: 0 var(--container-pad-x) var(--section-pad-y);
   }
 }
 
 @media (max-width: 767px) {
   .pillars {
-    padding: 0 16px 10vh;
+    padding: 0 var(--container-pad-x) var(--section-pad-y);
   }
 }

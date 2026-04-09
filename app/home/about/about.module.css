@@ -1,7 +1,7 @@
 .about {
   position: relative;
   z-index: 30;
-  padding: 20vh 48px;
+  padding: var(--section-pad-y) var(--container-pad-x);
   background: var(--background);
   border-bottom: var(--dark-grey) 1px solid;
 }
@@ -274,7 +274,7 @@
 
 @media (max-width: 1023px) {
   .about {
-    padding: 12vh 32px;
+    padding: var(--section-pad-y) var(--container-pad-x);
   }
 
   .statement {
@@ -303,7 +303,7 @@
 
 @media (max-width: 767px) {
   .about {
-    padding: 10vh 16px;
+    padding: var(--section-pad-y) var(--container-pad-x);
   }
 
   .statement {

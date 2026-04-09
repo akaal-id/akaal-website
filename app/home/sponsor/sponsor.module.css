@@ -6,7 +6,7 @@
   border-bottom: 1px solid rgb(255 255 255 / 12%);
   overflow: hidden;
   background: var(--black);
-  padding: 24px 0;
+  padding: 24px var(--container-pad-x);
 }
 
 .marquee {
@@ -46,5 +46,32 @@
 @media (prefers-reduced-motion: reduce) {
   .track {
     animation: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .mainContainer {
+    padding-left: var(--container-pad-x);
+    padding-right: var(--container-pad-x);
+  }
+
+  .logo {
+    height: 68px;
+  }
+}
+
+@media (max-width: 767px) {
+  .mainContainer {
+    padding-left: var(--container-pad-x);
+    padding-right: var(--container-pad-x);
+  }
+
+  .track {
+    gap: 20px;
+    padding: 8px 0;
+  }
+
+  .logo {
+    height: 56px;
   }
 }

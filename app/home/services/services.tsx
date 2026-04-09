@@ -15,7 +15,7 @@ const ECOSYSTEM_ITEMS = [
     desc: "Brand strategy, identity systems, and visual storytelling crafted to build recognition, trust, and long-term relevance.",
     href: "https://akaal.id",
     image: "/images/vision-bg.png",
-    cardImage: "/images/vision-bg.png",
+    cardImage: "/images/lab.png",
   },
   {
     id: "studio",
@@ -24,7 +24,7 @@ const ECOSYSTEM_ITEMS = [
     desc: "Creative campaigns, production workflows, and content execution designed to keep your brand consistent and culturally resonant.",
     href: "https://akaal.id",
     image: "/images/vision-bg.png",
-    cardImage: "/images/vision-bg.png",
+    cardImage: "/images/lab.png",
   },
   {
     id: "Labs",
@@ -33,7 +33,7 @@ const ECOSYSTEM_ITEMS = [
     desc: "Product design, web development, and technical implementation that transform ideas into scalable digital experiences.",
     href: "https://akaal.id",
     image: "/images/vision-bg.png",
-    cardImage: "/images/vision-bg.png",
+    cardImage: "/images/lab.png",
   },
   {
     id: "hegira",
@@ -120,24 +120,37 @@ export default function Services() {
     if (!section) return;
 
     const rows = section.querySelectorAll<HTMLElement>(`.${styles.row}`);
+    if (!rows.length) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-      },
-    });
+    // Reset rows every mount so navigation never leaves them invisible.
+    gsap.set(rows, { clearProps: "opacity,transform" });
 
+    const tl = gsap.timeline({ paused: true });
     tl.from(rows, {
       y: 50,
       opacity: 0,
       stagger: 0.12,
       duration: 0.9,
       ease: "power3.out",
+      immediateRender: false,
     });
 
+    const st = ScrollTrigger.create({
+      trigger: section,
+      start: "top 80%",
+      once: true,
+      onEnter: () => tl.play(),
+      onEnterBack: () => tl.play(),
+    });
+
+    const sectionTop = section.getBoundingClientRect().top;
+    if (sectionTop <= window.innerHeight * 0.8) {
+      tl.play();
+      st.kill();
+    }
+
     return () => {
-      tl.scrollTrigger?.kill();
+      st.kill();
       tl.kill();
     };
   }, []);
