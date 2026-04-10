@@ -1,6 +1,8 @@
 import styles from "./slug.module.css";
 import FinaleCta from "@/app/home/finale-cta";
 import { creativeData } from "@/content/services/creative";
+import { getShowcaseByService } from "@/lib/api/portfolio";
+import { toPortofolioItem } from "@/content/portofolio";
 import Hero from "./hero/hero";
 import Manifesto from "./manifesto/manifesto";
 import Capabilities from "./capabilities/capabilities";
@@ -15,13 +17,16 @@ export default async function ServicePage({
   const { slug } = await params;
   const data = creativeData;
 
+  const projects = await getShowcaseByService(slug);
+  const showcase = projects.map(toPortofolioItem);
+
   return (
     <main className={styles.page}>
       <Hero data={data.hero} />
       <Manifesto data={data.manifesto} />
       <Capabilities capabilities={data.capabilities} />
       <Workflow workflow={data.workflow} />
-      <Showcase projects={data.showcase} />
+      <Showcase projects={showcase} />
       <FinaleCta />
     </main>
   );

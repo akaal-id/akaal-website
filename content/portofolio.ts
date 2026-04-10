@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------------------
+// Portfolio types & adapters (client-safe — no server imports)
+// ---------------------------------------------------------------------------
+
 export type PortofolioCategory = "creative" | "labs" | "studio";
 
 export type PortofolioItem = {
@@ -8,61 +12,34 @@ export type PortofolioItem = {
   href: string;
 };
 
-export const PORTOFOLIO_PROJECTS: PortofolioItem[] = [
-  {
-    id: "hegira",
-    title: "Hegira - Brand Identity System",
-    category: "creative",
-    image: "/projects/photo-1.jpg",
-    href: "#",
-  },
-  {
-    id: "akaal-web",
-    title: "AKAAL - WebGL Experience",
-    category: "labs",
-    image: "/projects/photo-2.jpg",
-    href: "#",
-  },
-  {
-    id: "traveloka",
-    title: "Traveloka - Design System",
-    category: "studio",
-    image: "/projects/photo-3.jpg",
-    href: "#",
-  },
-  {
-    id: "helix",
-    title: "Helix - Visual Campaign Platform",
-    category: "creative",
-    image: "/projects/photo-2.jpg",
-    href: "#",
-  },
-  {
-    id: "nexa",
-    title: "Nexa - Commerce Experience",
-    category: "labs",
-    image: "/projects/photo-3.jpg",
-    href: "#",
-  },
-  {
-    id: "obsidian",
-    title: "Obsidian - Product Website",
-    category: "studio",
-    image: "/projects/photo-1.jpg",
-    href: "#",
-  },
-  {
-    id: "atlas",
-    title: "Atlas - Social Product Redesign",
-    category: "creative",
-    image: "/projects/photo-2.jpg",
-    href: "#",
-  },
-  {
-    id: "zenith",
-    title: "Zenith - Art Direction Series",
-    category: "studio",
-    image: "/projects/photo-3.jpg",
-    href: "#",
-  },
-];
+export interface PortfolioProject {
+  id: string;
+  title: string;
+  category: string;
+  service_slug: string;
+  image_url_1: string;
+  desc_1: string;
+  image_url_2: string | null;
+  desc_2: string | null;
+  image_url_3: string | null;
+  desc_3: string | null;
+  image_url_4: string | null;
+  desc_4: string | null;
+  image_url_5: string | null;
+  desc_5: string | null;
+  image_url_6: string | null;
+  desc_6: string | null;
+  image_url_7: string | null;
+  desc_7: string | null;
+  created_at: string;
+}
+
+export function toPortofolioItem(project: PortfolioProject): PortofolioItem {
+  return {
+    id: project.id,
+    title: project.title,
+    category: project.category as PortofolioCategory,
+    image: project.image_url_1,
+    href: `/portfolio/${project.id}`,
+  };
+}

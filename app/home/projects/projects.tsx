@@ -4,38 +4,18 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button/button";
+import type { PortofolioItem } from "@/content/portofolio";
 import styles from "./projects.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PROJECTS = [
-  {
-    id: "hegira",
-    title: "Hegira — Brand Identity System",
-    category: "BRANDING",
-    image: "/projects/photo-1.jpg",
-    href: "#",
-    hero: true,
-  },
-  {
-    id: "akaal-web",
-    title: "AKAAL — WebGL Experience",
-    category: "WEB DEV",
-    image: "/projects/photo-2.jpg",
-    href: "#",
-    hero: false,
-  },
-  {
-    id: "traveloka",
-    title: "Traveloka — Design System",
-    category: "PRODUCT",
-    image: "/projects/photo-3.jpg",
-    href: "#",
-    hero: false,
-  },
-];
+type ProjectItem = PortofolioItem & { hero?: boolean };
 
-export default function Projects() {
+type ProjectsProps = {
+  items: ProjectItem[];
+};
+
+export default function Projects({ items }: ProjectsProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -78,7 +58,7 @@ export default function Projects() {
         </div>
 
         <div className={styles.grid} role="list">
-          {PROJECTS.map((project) => (
+          {items.map((project) => (
             <a
               key={project.id}
               href={project.href}
