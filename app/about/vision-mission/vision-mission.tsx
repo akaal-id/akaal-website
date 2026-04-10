@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -17,23 +17,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function VisionMission() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
     const visionEl = section.querySelector<HTMLElement>(`.${styles.visionBlock}`);
-    const headerEl = section.querySelector<HTMLElement>(`.${styles.missionHeader}`);
-    const missionEls = section.querySelectorAll<HTMLElement>(`.${styles.missionRow}`);
+    const missionHeaderEl = section.querySelector<HTMLElement>(
+      `.${styles.missionInVision} .${styles.missionHeader}`
+    );
+    const missionCardEls = section.querySelectorAll<HTMLElement>(`.${styles.missionCard}`);
 
     if (visionEl) {
       gsap.set(visionEl, { autoAlpha: 0, y: 28, filter: "blur(8px)" });
     }
-    if (headerEl) {
-      gsap.set(headerEl, { autoAlpha: 0, y: 22 });
+    if (missionHeaderEl) {
+      gsap.set(missionHeaderEl, { autoAlpha: 0, y: 22 });
     }
-    gsap.set(missionEls, { autoAlpha: 0, y: 20 });
+    gsap.set(missionCardEls, { autoAlpha: 0, y: 20 });
 
     const visionTween = visionEl
       ? gsap.to(visionEl, {
@@ -50,15 +51,15 @@ export default function VisionMission() {
         })
       : null;
 
-    const missionTween = gsap.to([headerEl, ...missionEls].filter(Boolean), {
+    const missionTween = gsap.to([missionHeaderEl, ...missionCardEls].filter(Boolean), {
       autoAlpha: 1,
       y: 0,
       duration: 0.7,
       ease: "power3.out",
-      stagger: 0.12,
+      stagger: 0.1,
       scrollTrigger: {
-        trigger: section.querySelector(`.${styles.missionBlock}`),
-        start: "top 72%",
+        trigger: section.querySelector(`.${styles.missionInVision}`),
+        start: "top 78%",
         toggleActions: "play none none reverse",
       },
     });
@@ -86,60 +87,21 @@ export default function VisionMission() {
             </blockquote>
           </div>
 
-          {/* <div className={styles.pullquoteWrap}>
-            <p className={styles.labelMission}>{ABOUT_MISSION_PILL}</p>
-            <div className={styles.pullquoteGlow} aria-hidden />
-            <blockquote className={styles.pullquot}>
-              <p>{ABOUT_MISSION_LEAD}</p>
-            </blockquote>
-          </div> */}
-          
-        </header>
-
-        {/* <div className={styles.missionBlock}>
-          <div className={styles.missiongrid}>
+          <div className={styles.missionInVision}>
             <div className={styles.missionHeader}>
               <p className={styles.labelMission}>{ABOUT_MISSION_PILL}</p>
-              <p className={styles.missionLead}>{ABOUT_MISSION_LEAD}</p>
+              {/* <p className={styles.missionLead}>{ABOUT_MISSION_LEAD}</p> */}
             </div>
-            <ol className={styles.missionList}>
-              {ABOUT_MISSION_ITEMS.map((item, index) => {
-                const isActive = activeIndex === index;
-                const itemId = `mission-item-${index}`;
-                const panelId = `mission-panel-${index}`;
-
-                return (
-                  <li
-                    key={item.title}
-                    className={`${styles.missionRow} ${isActive ? styles.missionRowActive : ""}`}
-                  >
-                    <button
-                      type="button"
-                      className={styles.missionTrigger}
-                      onClick={() => setActiveIndex((prev) => (prev === index ? null : index))}
-                      aria-expanded={isActive}
-                      aria-controls={panelId}
-                      id={itemId}
-                    >
-                      <span className={styles.missionIndex}>
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <h3 className={styles.missionTitle}>{item.title}</h3>
-                    </button>
-                    <div
-                      className={`${styles.missionBody} ${isActive ? styles.missionBodyOpen : ""}`}
-                      id={panelId}
-                      role="region"
-                      aria-labelledby={itemId}
-                    >
-                      <p className={styles.missionSub}>{item.sub}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
+            <div className={styles.missionCards}>
+              {ABOUT_MISSION_ITEMS.map((item) => (
+                <article key={item.title} className={styles.missionCard}>
+                  <h3 className={styles.missionCardTitle}>{item.title}</h3>
+                  <p className={styles.missionCardBody}>{item.sub}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div> */}
+        </header>
       </div>
     </section>
   );

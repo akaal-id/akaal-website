@@ -1,0 +1,90 @@
+/* ── Manifesto · Massive Editorial Typography ── */
+
+.section {
+  position: relative;
+  padding: clamp(100px, 20vh, 260px) var(--container-pad-x);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  top: 15%;
+  left: -8%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(
+    circle,
+    rgba(138, 43, 226, 0.05) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(48px);
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 3fr;
+  gap: clamp(32px, 5vw, 96px);
+  align-items: start;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: hsl(var(--muted-foreground));
+  padding-top: 10px;
+  position: sticky;
+  top: 120px;
+  margin: 0;
+}
+
+.body {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: -0.03em;
+  color: #222;
+}
+
+.word {
+  display: inline;
+  will-change: color;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1023px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .label {
+    position: static;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: clamp(64px, 14vh, 160px) var(--container-pad-x);
+  }
+
+  .text {
+    font-size: clamp(20px, 6vw, 32px);
+    line-height: 1.35;
+  }
+}

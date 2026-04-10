@@ -1,0 +1,173 @@
+/* ── Capabilities · Service Rows (matches /home/services) ── */
+
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--background);
+  padding: var(--section-pad-y) var(--container-pad-x);
+  border-bottom: 1px solid var(--dark-grey);
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+/* ── Rows ── */
+
+.rows {
+  border-top: 1px solid #222;
+}
+
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 96px 48px;
+  border-bottom: 1px solid #222;
+  overflow: hidden;
+  isolation: isolate;
+  transition: background-color 0.45s ease;
+}
+
+.row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--purple);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 240ms ease;
+  z-index: 3;
+}
+
+.row:hover {
+  background: rgb(109 40 217 / 0.03);
+}
+
+.row:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Row Elements ── */
+
+.number {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--white);
+  opacity: 0.4;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  min-width: 28px;
+  transition: color 0.4s ease, opacity 0.4s ease;
+}
+
+.row:hover .number {
+  color: var(--teal);
+  opacity: 1;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 48px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  opacity: 0.4;
+  transition: opacity 0.4s ease;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  max-width: 9ch;
+  margin-right: auto;
+}
+
+.row:nth-child(1) .title {
+  max-width: 13ch;
+}
+
+.row:hover .title {
+  opacity: 1;
+}
+
+.desc {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #555;
+  letter-spacing: 0.03em;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  max-width: 320px;
+  text-align: right;
+  line-height: 1.6;
+  transition: color 0.4s ease;
+}
+
+.row:hover .desc {
+  color: #888;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1023px) {
+  .row {
+    padding: 36px 32px;
+    gap: 24px;
+  }
+
+  .desc {
+    display: none;
+  }
+
+  .title {
+    line-height: 1.05;
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    margin-bottom: 24px;
+  }
+
+  .row {
+    padding: 28px 16px;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .number {
+    display: none;
+  }
+
+  .title {
+    font-size: clamp(30px, 10vw, 44px);
+  }
+}

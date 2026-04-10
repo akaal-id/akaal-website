@@ -117,21 +117,21 @@ export default function Navbar() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <Link href="/ecosystem/creative" className={`${styles.dropdownRowMuted} ${styles.submenuButton}`}>
+                        <Link href="/services/creative" className={`${styles.dropdownRowMuted} ${styles.submenuButton}`}>
                           <span>
                             <span>AKAAL</span>
                             <span className={styles.dropdownRowAccent}> CREATIVE</span>
                           </span>
                           <ArrowRight className={`${styles.iconSm} ${styles.rowArrow}`} />
                         </Link>
-                        <Link href="/ecosystem/studio" className={`${styles.dropdownRowMuted} ${styles.submenuButton}`}>
+                        <Link href="/services/studio" className={`${styles.dropdownRowMuted} ${styles.submenuButton}`}>
                           <span>
                             <span>AKAAL</span>
                             <span className={styles.dropdownRowAccent}> STUDIO</span>
                           </span>
                           <ArrowRight className={`${styles.iconSm} ${styles.rowArrow}`} />
                         </Link>
-                        <Link href="/ecosystem/tech" className={`${styles.dropdownRowMuted} ${styles.submenuButton}`}>
+                        <Link href="/services/tech" className={`${styles.dropdownRowMuted} ${styles.submenuButton}`}>
                           <span>
                             <span>AKAAL</span>
                             <span className={styles.dropdownRowAccent}> TECH</span>

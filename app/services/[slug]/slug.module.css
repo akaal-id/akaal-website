@@ -1,0 +1,7 @@
+/* ── Service Page Shell ── */
+
+.page {
+  position: relative;
+  z-index: 1;
+  background: var(--background);
+}
