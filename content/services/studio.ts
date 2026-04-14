@@ -22,7 +22,7 @@ export const studioData: ServiceStaticContent = {
     {
       title: "Cinematic Videography",
       description:
-        "Motion that breathes — pacing, lensing, and sound design aligned to a single creative direction, whether for launch films, social cuts, or long-form brand stories.",
+        "Motion that breathes — pacing, lensing, and sound design aligned to a single creative direction, whether for launch films, social cuts, or long-form brand newsroom.",
     },
     {
       title: "Visual Storytelling",

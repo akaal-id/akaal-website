@@ -127,7 +127,7 @@ export const JOURNEYS_HEADLINE = "Crafting Experiences,";
 export const JOURNEYS_HEADLINE_ACCENT = "Empowering Impact.";
 
 export const JOURNEYS_INTRO =
-  "AKAAL helps brands grow through creative journeys, marketing strategies, and strong visual identity. We bring ideas to life, build emotional connections, and create impactful campaigns. Every step we design delivers authentic and memorable brand stories.";
+  "AKAAL helps brands grow through creative journeys, marketing strategies, and strong visual identity. We bring ideas to life, build emotional connections, and create impactful campaigns. Every step we design delivers authentic and memorable brand newsroom.";
 
 export const ABOUT_JOURNEYS = [
   {

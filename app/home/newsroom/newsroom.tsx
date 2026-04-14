@@ -7,7 +7,7 @@ import styles from "./newsroom.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const NEWS = [
+const NEWSROOM_ITEMS = [
   {
     id: "1",
     date: "02.04.2026",
@@ -75,12 +75,12 @@ export default function Newsroom() {
       <div className={styles.inner}>
         <div className={styles.header}>
           <span className={styles.label}>[newsroom]</span>
-          <h2 className={styles.title}>Latest News</h2>
+          <h2 className={styles.title}>Latest Newsroom</h2>
         </div>
 
         <div className={styles.grid}>
           {/* Row 1: wide card + normal card */}
-          {NEWS.slice(0, 2).map((item, i) => (
+          {NEWSROOM_ITEMS.slice(0, 2).map((item, i) => (
             <a
               key={item.id}
               href={item.href}
@@ -133,7 +133,7 @@ export default function Newsroom() {
             </div>
           </a>
 
-          {NEWS.slice(2).map((item) => (
+          {NEWSROOM_ITEMS.slice(2).map((item) => (
             <a
               key={item.id}
               href={item.href}

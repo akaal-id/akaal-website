@@ -1,0 +1,78 @@
+.page {
+  width: min(900px, 92vw);
+  margin: 0 auto;
+  padding: 9rem 0 5rem;
+}
+
+.article {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.meta {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9a9a9a;
+  font-size: 0.72rem;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.1;
+}
+
+.imageWrap {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #111;
+  border: 1px solid #1f1f1f;
+}
+
+.imageWrap img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.richText {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #dedede;
+}
+
+.richText :global(p) {
+  margin: 0 0 1rem;
+}
+
+.richText :global(h2),
+.richText :global(h3) {
+  margin: 1.6rem 0 0.85rem;
+}
+
+.notFound {
+  min-height: 55vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 0.8rem;
+}
+
+.notFoundCode {
+  font-size: 4rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.notFoundText {
+  margin: 0;
+  color: #a0a0a0;
+}
+
+.notFoundLink {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}

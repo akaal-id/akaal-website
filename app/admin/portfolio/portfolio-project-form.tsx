@@ -150,7 +150,7 @@ export default function PortfolioProjectForm({
               <Minus strokeWidth={2.25} size={18} aria-hidden />
             </button>
             <div className={styles.galleryRowToolbarMid}>
-              <span className={styles.galleryRowToolbarLabel}>Add / delete row</span>
+              {/* <span className={styles.galleryRowToolbarLabel}>Add / delete row</span> */}
               <span className={styles.galleryRowToolbarMeta} aria-live="polite">
                 {visibleGalleryRows} / {MAX_GALLERY_ROWS}
               </span>

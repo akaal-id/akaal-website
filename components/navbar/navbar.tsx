@@ -161,7 +161,7 @@ export default function Navbar() {
 
                 <div className={styles.dropdownMeta}>
                   <div className={styles.dropdownMetaCol}>
-                    <Link href="/stories" className={styles.dropdownMetaItem}>News</Link>
+                    <Link href="/newsroom" className={styles.dropdownMetaItem}>Newsroom</Link>
                     <Link href="/portofolio" className={styles.dropdownMetaItem}>Portofolio</Link>
                   </div>
                   <div className={styles.dropdownMetaCol}>
