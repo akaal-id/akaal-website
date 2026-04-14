@@ -1,6 +1,13 @@
 import "server-only";
 import { createClient } from "@/utils/supabase/server";
+import { resolvePortfolioProjectStorageUrls } from "@/utils/supabase/storage-resolve";
 import type { PortfolioProject } from "@/content/portofolio";
+
+async function withResolvedStorageUrls(
+  rows: PortfolioProject[]
+): Promise<PortfolioProject[]> {
+  return Promise.all(rows.map((row) => resolvePortfolioProjectStorageUrls(row)));
+}
 
 export async function getShowcaseByService(
   slug: string
@@ -13,7 +20,7 @@ export async function getShowcaseByService(
     .order("created_at", { ascending: false });
 
   if (error) throw error;
-  return data ?? [];
+  return withResolvedStorageUrls((data ?? []) as PortfolioProject[]);
 }
 
 export async function getProjectById(
@@ -27,7 +34,7 @@ export async function getProjectById(
     .single();
 
   if (error) return null;
-  return data;
+  return resolvePortfolioProjectStorageUrls(data as PortfolioProject);
 }
 
 export async function getAllProjects(): Promise<PortfolioProject[]> {
@@ -38,5 +45,5 @@ export async function getAllProjects(): Promise<PortfolioProject[]> {
     .order("created_at", { ascending: false });
 
   if (error) throw error;
-  return data ?? [];
+  return withResolvedStorageUrls((data ?? []) as PortfolioProject[]);
 }

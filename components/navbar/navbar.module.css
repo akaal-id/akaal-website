@@ -56,6 +56,25 @@
   color: inherit;
 }
 
+.portfolioBackLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+  flex: 1;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+.portfolioBackIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  opacity: 0.92;
+}
+
 .menuButton {
   inline-size: 16px;
   block-size: 16px;

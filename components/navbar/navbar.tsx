@@ -10,6 +10,7 @@ import {
   Plus,
   ArrowUpRight,
   ArrowRight,
+  ChevronLeft,
   MessageCircle,
   Mail,
 } from "lucide-react";
@@ -27,10 +28,15 @@ function getActivePageName(pathname: string): string {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const isAdminRoute =
+    pathname.startsWith("/admin") || pathname.startsWith("/app/admin");
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [ecosystemOpen, setEcosystemOpen] = useState(false);
   const activePageName = getActivePageName(pathname);
+  const isPortfolioCaseStudy = /^\/portfolio\/[^/]+\/?$/.test(pathname);
+
+  if (isAdminRoute) return null;
 
   useEffect(() => {
     setMenuOpen(false);
@@ -57,9 +63,19 @@ export default function Navbar() {
       <div className={styles.mainContainer}>
         <div className={styles.mainGroup}>
           <div className={styles.navBlock}>
-            <Link href="/" className={styles.homeLink}>
-              {activePageName}
-            </Link>
+            {isPortfolioCaseStudy ? (
+              <Link
+                href="/portofolio"
+                className={`${styles.homeLink} ${styles.portfolioBackLink}`}
+              >
+                <ChevronLeft className={styles.portfolioBackIcon} aria-hidden />
+                <span>Back to portfolio</span>
+              </Link>
+            ) : (
+              <Link href="/" className={styles.homeLink}>
+                {activePageName}
+              </Link>
+            )}
             <motion.button
               className={styles.menuButton}
               onClick={() => setMenuOpen(prev => !prev)}

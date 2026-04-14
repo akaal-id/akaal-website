@@ -1,0 +1,76 @@
+.adminContainer {
+  --admin-pad: 32px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 5% 0%, rgb(120 119 198 / 12%) 0%, rgb(0 0 0 / 0%) 42%),
+    #050505;
+  color: #fff;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.topbar {
+  border-bottom: 1px solid #202020;
+  padding: var(--admin-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: rgb(8 8 8 / 88%);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.brand {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: #a1a1aa;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.content {
+  width: min(1200px, 100%);
+  padding: var(--admin-pad);
+  margin: 0 auto;
+}
+
+.link {
+  border: 1px solid #27272a;
+  color: #fafafa;
+  text-decoration: none;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  border-color: #626262;
+  background: #101010;
+}
+
+.linkActive {
+  border-color: #fafafa;
+  background: #121212;
+}
+
+@media (width <= 900px) {
+  .topbar {
+    padding: 20px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+}

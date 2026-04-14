@@ -1,230 +1,126 @@
-/* ── Portfolio Case Study · Brutalist-Luxury Editorial ── */
+/* ── Portfolio case study · centered editorial ── */
 
 .page {
   position: relative;
   z-index: 1;
+  min-height: 100svh;
   background: #000;
   color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(5.5rem, 10vw, 7rem) var(--container-pad-x) clamp(4rem, 8vw, 6rem);
+  box-sizing: border-box;
 }
 
-/* ── Hero ── */
+/* ── Header (eyebrow + title) ── */
 
-.hero {
-  position: relative;
+.caseHeader {
   width: 100%;
-  height: 100svh;
-  overflow: hidden;
+  max-width: 1600px;
+  margin: 0 auto clamp(2.5rem, 6vw, 4.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 144px 0 72px;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
 }
 
-.heroImage {
-  position: absolute;
-  inset: 0;
+.caseEyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 1.1vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.caseTitle {
+  margin: 0;
+  max-width: 20ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+
+/* ── List: image + description pairs ── */
+
+.caseList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem, 3vw, 1rem);
+}
+
+.caseListItem {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem, 3vw, 1rem);
+}
+
+.caseImageWrap {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #0a0a0a;
+}
+
+.caseImageWrap img {
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.55);
 }
 
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 40%,
-    rgba(0, 0, 0, 0.85) 100%
-  );
-}
-
-.heroContent {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0 var(--container-pad-x) clamp(48px, 8vw, 96px);
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-.heroCategory {
-  display: inline-block;
-  margin: 0 0 20px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--teal);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 6px 14px;
-}
-
-.heroTitle {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(40px, 7vw, 112px);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
-  color: var(--white);
-  max-width: 14ch;
-}
-
-/* ── Brief ── */
-
-.brief {
-  padding: clamp(80px, 12vw, 160px) var(--container-pad-x);
-  display: flex;
-  justify-content: center;
-}
-
-.briefInner {
-  max-width: 680px;
+.caseDescWrap {
   width: 100%;
-}
-
-.briefLabel {
-  display: block;
-  margin: 0 0 32px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: hsl(var(--muted-foreground));
-}
-
-.briefText {
-  margin: 0;
-  font-family: var(--font-serif);
-  font-size: clamp(18px, 2vw, 24px);
-  font-weight: 400;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.briefDivider {
-  width: 64px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  margin: clamp(48px, 6vw, 80px) 0 0;
-}
-
-/* ── Editorial Gallery ── */
-
-.gallery {
+  max-width: 1600px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  gap: clamp(64px, 10vw, 140px);
-  padding: 0 0 clamp(80px, 12vw, 160px);
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
 }
 
-/* ── Gallery Block (shared) ── */
-
-.galleryBlock {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(20px, 3vw, 36px);
-}
-
-.galleryCaption {
+.caseDescText {
   margin: 0;
+  max-width: 48ch;
   font-family: var(--font-serif);
-  font-size: clamp(14px, 1.2vw, 16px);
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
   font-weight: 400;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.5);
-  max-width: 480px;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.88);
+  text-align: center;
 }
 
-.galleryImage {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-/* ── Layout: Align Left ── */
-
-.alignLeft {
-  padding-left: var(--container-pad-x);
-  padding-right: 0;
-  align-items: flex-start;
-}
-
-.alignLeft .galleryImage {
-  width: 65%;
-}
-
-.alignLeft .galleryCaption {
-  padding-left: 0;
-}
-
-/* ── Layout: Full Bleed ── */
-
-.fullBleed {
-  padding: 0;
-  align-items: stretch;
-}
-
-.fullBleed .galleryImage {
-  width: 100%;
-  max-height: 85vh;
-}
-
-.fullBleed .galleryCaption {
-  padding: 0 var(--container-pad-x);
-}
-
-/* ── Layout: Align Right ── */
-
-.alignRight {
-  padding-right: var(--container-pad-x);
-  padding-left: 0;
-  align-items: flex-end;
-}
-
-.alignRight .galleryImage {
-  width: 65%;
-}
-
-.alignRight .galleryCaption {
-  text-align: right;
-  padding-right: 0;
-}
-
-/* ── Back Link ── */
-
-.backLink {
-  position: fixed;
-  top: clamp(20px, 3vw, 32px);
-  left: var(--container-pad-x);
-  z-index: 100;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: none;
-  padding: 8px 16px;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: color 0.3s ease, border-color 0.3s ease;
-}
-
-.backLink:hover {
-  color: var(--white);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* ── 404 State ── */
+/* ── 404 ── */
 
 .notFound {
   display: flex;
@@ -271,45 +167,4 @@
 
 .notFoundLink:hover {
   border-color: var(--teal);
-}
-
-/* ── Responsive ── */
-
-@media (max-width: 1023px) {
-  .alignLeft .galleryImage,
-  .alignRight .galleryImage {
-    width: 80%;
-  }
-}
-
-@media (max-width: 767px) {
-  .heroTitle {
-    max-width: 100%;
-  }
-
-  .alignLeft,
-  .alignRight {
-    padding-left: var(--container-pad-x);
-    padding-right: var(--container-pad-x);
-  }
-
-  .alignLeft .galleryImage,
-  .alignRight .galleryImage {
-    width: 100%;
-  }
-
-  .alignRight .galleryCaption {
-    text-align: left;
-  }
-
-  .backLink {
-    left: var(--container-pad-x);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .heroImage,
-  .backLink {
-    transition: none;
-  }
 }

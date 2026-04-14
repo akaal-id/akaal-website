@@ -1,0 +1,48 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #f4f4f5;
+  font-size: 0.86rem;
+  border: 1px solid #232323;
+  background: #080808;
+}
+
+.header {
+  border-bottom: 1px solid #2b2b2b;
+  background: #0f0f0f;
+}
+
+.row {
+  border-bottom: 1px solid #1b1b1b;
+  transition: background 0.2s ease;
+}
+
+.row:hover {
+  background: #121212;
+}
+
+.head {
+  height: 2.95rem;
+  padding: 0.82rem 1rem;
+  text-align: left;
+  font-size: 0.67rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #a1a1aa;
+  font-weight: 700;
+}
+
+.cell {
+  padding: 0.92rem 1rem;
+  vertical-align: middle;
+}
+
+.footer {
+  border-top: 1px solid #27272a;
+}
+
+.caption {
+  margin-top: 0.75rem;
+  color: #6b7280;
+  font-size: 0.82rem;
+}

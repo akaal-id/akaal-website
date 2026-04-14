@@ -3,43 +3,27 @@ import { getProjectById } from "@/lib/api/portfolio";
 import type { PortfolioProject } from "@/content/portofolio";
 import styles from "./portfolio.module.css";
 
-const GALLERY_LAYOUT: Record<number, string> = {
-  2: styles.alignLeft,
-  3: styles.fullBleed,
-  4: styles.alignRight,
-  5: styles.fullBleed,
-  6: styles.alignLeft,
-  7: styles.alignRight,
+type CaseSlot = {
+  index: number;
+  imageUrl: string | null;
+  description: string | null;
 };
 
-function GalleryBlock({
-  index,
-  project,
-}: {
-  index: number;
-  project: PortfolioProject;
-}) {
-  const imageKey = `image_url_${index}` as keyof PortfolioProject;
-  const descKey = `desc_${index}` as keyof PortfolioProject;
-  const imageUrl = project[imageKey] as string | null;
-  const description = project[descKey] as string | null;
-
-  if (!imageUrl) return null;
-
-  return (
-    <div className={`${styles.galleryBlock} ${GALLERY_LAYOUT[index] ?? styles.fullBleed}`}>
-      <img
-        className={styles.galleryImage}
-        src={imageUrl}
-        alt={`${project.title} — detail ${index - 1}`}
-        loading="lazy"
-        draggable={false}
-      />
-      {description && (
-        <p className={styles.galleryCaption}>{description}</p>
-      )}
-    </div>
-  );
+function buildCaseSlots(project: PortfolioProject): CaseSlot[] {
+  const slots: CaseSlot[] = [];
+  for (let i = 1; i <= 7; i += 1) {
+    const imageKey = `image_url_${i}` as keyof PortfolioProject;
+    const descKey = `desc_${i}` as keyof PortfolioProject;
+    const rawImg = project[imageKey] as string | null;
+    const rawDesc = project[descKey] as string | null;
+    const imageUrl =
+      typeof rawImg === "string" && rawImg.trim() ? rawImg.trim() : null;
+    const description =
+      typeof rawDesc === "string" && rawDesc.trim() ? rawDesc.trim() : null;
+    if (!imageUrl && !description) continue;
+    slots.push({ index: i, imageUrl, description });
+  }
+  return slots;
 }
 
 export default async function PortfolioCaseStudyPage({
@@ -64,37 +48,42 @@ export default async function PortfolioCaseStudyPage({
     );
   }
 
-  const galleryIndices = [2, 3, 4, 5, 6, 7] as const;
+  const slots = buildCaseSlots(project);
 
   return (
     <main className={styles.page}>
-      <section className={styles.hero}>
-        <img
-          className={styles.heroImage}
-          src={project.image_url_1}
-          alt={project.title}
-          draggable={false}
-        />
-        <div className={styles.heroOverlay} />
-        <div className={styles.heroContent}>
-          <span className={styles.heroCategory}>[ {project.category} ]</span>
-          <h1 className={styles.heroTitle}>{project.title}</h1>
-        </div>
-      </section>
+      <header className={styles.caseHeader}>
+        <p className={styles.caseEyebrow}>[ {project.category} ]</p>
+        <h1 className={styles.caseTitle}>{project.title}</h1>
+      </header>
 
-      <section className={styles.brief}>
-        <div className={styles.briefInner}>
-          <span className={styles.briefLabel}>[ The Brief ]</span>
-          <p className={styles.briefText}>{project.desc_1}</p>
-          <hr className={styles.briefDivider} />
-        </div>
-      </section>
-
-      <section className={styles.gallery}>
-        {galleryIndices.map((i) => (
-          <GalleryBlock key={i} index={i} project={project} />
+      <ul className={styles.caseList}>
+        {slots.map((slot) => (
+          <li key={slot.index} className={styles.caseListItem}>
+            {slot.imageUrl ? (
+              <div className={styles.caseImageWrap}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={slot.imageUrl}
+                  alt={
+                    slot.index === 1
+                      ? project.title
+                      : `${project.title} — frame ${slot.index}`
+                  }
+                  loading={slot.index === 1 ? "eager" : "lazy"}
+                  decoding="async"
+                  draggable={false}
+                />
+              </div>
+            ) : null}
+            {slot.description ? (
+              <div className={styles.caseDescWrap}>
+                <p className={styles.caseDescText}>{slot.description}</p>
+              </div>
+            ) : null}
+          </li>
         ))}
-      </section>
+      </ul>
     </main>
   );
 }
