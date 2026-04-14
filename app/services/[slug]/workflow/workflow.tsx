@@ -19,45 +19,44 @@ export default function Workflow({ workflow }: WorkflowProps) {
     const section = sectionRef.current;
     if (!section) return;
 
-    const labelEl = section.querySelector<HTMLElement>(`.${styles.label}`);
-    const stepEls = section.querySelectorAll<HTMLElement>(`.${styles.step}`);
-    const railEl = section.querySelector<HTMLElement>(`.${styles.railLine}`);
+    const headerEls = section.querySelectorAll<HTMLElement>(
+      `.${styles.headerEyebrow}, .${styles.headerTitle}, .${styles.headerLead}`
+    );
+    const cardEls = section.querySelectorAll<HTMLElement>(`.${styles.card}`);
+    const progressEl = section.querySelector<HTMLElement>(`.${styles.progressFill}`);
 
-    if (labelEl) {
-      gsap.set(labelEl, { autoAlpha: 0, y: 22 });
-    }
-    gsap.set(stepEls, { autoAlpha: 0, y: 28, filter: "blur(8px)" });
-    if (railEl) {
-      gsap.set(railEl, { scaleY: 0, transformOrigin: "top" });
+    gsap.set(headerEls, { autoAlpha: 0, y: 24 });
+    gsap.set(cardEls, { autoAlpha: 0, y: 32 });
+    if (progressEl) {
+      gsap.set(progressEl, { scaleX: 0, transformOrigin: "left" });
     }
 
     const tweens: gsap.core.Tween[] = [];
 
-    if (labelEl) {
-      tweens.push(
-        gsap.to(labelEl, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 78%",
-            toggleActions: "play none none reverse",
-          },
-        })
-      );
-    }
+    tweens.push(
+      gsap.to(headerEls, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.65,
+        ease: "power3.out",
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 78%",
+          toggleActions: "play none none reverse",
+        },
+      })
+    );
 
-    if (railEl) {
+    if (progressEl) {
       tweens.push(
-        gsap.to(railEl, {
-          scaleY: 1,
-          duration: 1.2,
-          ease: "power2.out",
+        gsap.to(progressEl, {
+          scaleX: 1,
+          duration: 1.1,
+          ease: "power2.inOut",
           scrollTrigger: {
             trigger: section,
-            start: "top 70%",
+            start: "top 72%",
             toggleActions: "play none none reverse",
           },
         })
@@ -65,16 +64,15 @@ export default function Workflow({ workflow }: WorkflowProps) {
     }
 
     tweens.push(
-      gsap.to(stepEls, {
+      gsap.to(cardEls, {
         autoAlpha: 1,
         y: 0,
-        filter: "blur(0px)",
-        duration: 0.85,
+        duration: 0.75,
         ease: "power3.out",
-        stagger: 0.15,
+        stagger: { each: 0.1, from: "start" },
         scrollTrigger: {
           trigger: section,
-          start: "top 65%",
+          start: "top 62%",
           toggleActions: "play none none reverse",
         },
       })
@@ -86,26 +84,58 @@ export default function Workflow({ workflow }: WorkflowProps) {
         t.kill();
       });
     };
-  }, []);
+  }, [workflow.length]);
 
   return (
-    <section ref={sectionRef} className={styles.section} aria-label="Our process">
+    <section
+      ref={sectionRef}
+      className={styles.section}
+      aria-labelledby="workflow-heading"
+    >
+      <div className={styles.glow} aria-hidden="true" />
       <div className={styles.inner}>
-        <p className={styles.label}>[ How We Work ]</p>
-        <div className={styles.timeline}>
-          <div className={styles.rail} aria-hidden="true">
-            <div className={styles.railLine} />
+        <header className={styles.header}>
+          <p className={styles.headerEyebrow}>[ How we work ]</p>
+          <div className={styles.headerText}>
+            <h2 id="workflow-heading" className={styles.headerTitle}>
+              Process built for clarity
+            </h2>
+            <p className={styles.headerLead}>
+              Four connected phases — each step informs the next so strategy,
+              craft, and growth stay aligned.
+            </p>
           </div>
-          <div className={styles.steps}>
-            {workflow.map((step) => (
-              <article key={step.step} className={styles.step}>
-                <div className={styles.stepDot} aria-hidden="true" />
-                <p className={styles.stepNumber}>{step.step}</p>
-                <h3 className={styles.stepTitle}>{step.title}</h3>
-                <p className={styles.stepBody}>{step.description}</p>
-              </article>
+          <div className={styles.progressTrack} aria-hidden="true">
+            <div className={styles.progressFill} />
+          </div>
+          <ol className={styles.phaseStrip} aria-label="Phase numbers">
+            {workflow.map((s) => (
+              <li key={s.step} className={styles.phaseItem}>
+                <span className={styles.phaseDot} />
+                <span className={styles.phaseNum}>{s.step}</span>
+              </li>
             ))}
-          </div>
+          </ol>
+        </header>
+
+        <div className={styles.grid}>
+          {workflow.map((step, index) => (
+            <article key={step.step} className={styles.card}>
+              <div className={styles.cardTop}>
+                <span className={styles.cardIndex} aria-hidden="true">
+                  {step.step}
+                </span>
+                <span className={styles.cardPhase}>
+                  Phase {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h3 className={styles.cardTitle}>{step.title}</h3>
+              <p className={styles.cardBody}>{step.description}</p>
+              {index < workflow.length - 1 && (
+                <span className={styles.cardLink} aria-hidden="true" />
+              )}
+            </article>
+          ))}
         </div>
       </div>
     </section>

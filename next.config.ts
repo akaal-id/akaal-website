@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      { source: "/services/tech", destination: "/services/akaalabs", permanent: true },
+      { source: "/services/labs", destination: "/services/akaalabs", permanent: true },
+    ];
+  },
   experimental: {
     // Server Actions default is 1 MB; must live under experimental (not top-level serverActions).
     serverActions: {

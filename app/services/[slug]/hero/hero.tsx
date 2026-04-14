@@ -16,9 +16,7 @@ export default function Hero({ data }: HeroProps) {
     const section = sectionRef.current;
     if (!section) return;
 
-    const eyebrow = section.querySelector<HTMLElement>(`.${styles.eyebrow}`);
     const crest = section.querySelector<HTMLElement>(`.${styles.crest}`);
-    const rule = section.querySelector<HTMLElement>(`.${styles.rule}`);
     const headlineInner = section.querySelector<HTMLElement>(`.${styles.headlineInner}`);
 
     const tl = gsap.timeline({
@@ -35,21 +33,6 @@ export default function Hero({ data }: HeroProps) {
         duration: 1.4,
         ease: "power2.out",
       }, 0);
-    }
-
-    if (eyebrow) {
-      gsap.set(eyebrow, { autoAlpha: 0, y: 16, filter: "blur(4px)" });
-      tl.to(eyebrow, {
-        autoAlpha: 1,
-        y: 0,
-        filter: "blur(0px)",
-        duration: 0.8,
-      }, 0.5);
-    }
-
-    if (rule) {
-      gsap.set(rule, { scaleX: 0 });
-      tl.to(rule, { scaleX: 1, duration: 0.9 }, 0.7);
     }
 
     if (headlineInner) {
@@ -71,15 +54,15 @@ export default function Hero({ data }: HeroProps) {
       <div className={styles.grain} aria-hidden="true" />
       <div className={styles.glow} aria-hidden="true" />
       <div className={styles.content}>
-        <p className={styles.eyebrow}>{data.eyebrow}</p>
-        <img
-          className={styles.crest}
-          src={data.logo}
-          alt=""
-          draggable={false}
-          aria-hidden="true"
-        />
-        <span className={styles.rule} aria-hidden="true" />
+        <div className={styles.logoContainer}>
+          <img
+            className={styles.crest}
+            src={data.logo}
+            alt=""
+            draggable={false}
+            aria-hidden="true"
+          />
+        </div>
         <h1 id="service-headline" className={styles.headline}>
           <span className={styles.headlineInner}>{data.headline}</span>
         </h1>

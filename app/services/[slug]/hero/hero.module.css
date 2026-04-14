@@ -1,4 +1,4 @@
-/* ── Hero · Centered Crest Reveal ── */
+/* ── Hero · Bottom-left lockup ── */
 
 @keyframes grainDrift {
   0% {
@@ -40,11 +40,10 @@
 
 .section {
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100svh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-start;
   padding: var(--container-pad-x);
   overflow: hidden;
   isolation: isolate;
@@ -86,57 +85,44 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
+  width: 100%;
+  height: 100%;
+  
+  padding: 48px 0;
 }
 
-/* ── Eyebrow ── */
+/* ── Logo wrapper + crest ── */
 
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: clamp(10px, 0.85vw, 12px);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.32em;
-  color: rgba(255, 255, 255, 0.35);
-  margin: 0;
-  visibility: hidden;
+.logoContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 140px;
+  flex-shrink: 0;
 }
-
-/* ── Logo Crest ── */
 
 .crest {
-  width: clamp(100px, 14vw, 200px);
+  position: relative;
+  width: 100%;
   height: auto;
-  margin: clamp(40px, 5vw, 72px) 0 clamp(32px, 4vw, 56px);
+  margin: 0;
   user-select: none;
   visibility: hidden;
   will-change: transform, filter;
 }
 
-/* ── Decorative Rule ── */
-
-.rule {
-  display: block;
-  width: clamp(40px, 5vw, 72px);
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  );
-  margin-bottom: clamp(28px, 3.5vw, 48px);
-  transform-origin: center;
-}
-
 /* ── Headline ── */
 
 .headline {
+  position: relative;
   margin: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .headlineInner {
+  position: relative;
   display: block;
   font-family: var(--font-display);
   font-size: clamp(48px, 11vw, 180px);
@@ -155,8 +141,12 @@
     min-height: 90dvh;
   }
 
-  .crest {
-    width: clamp(80px, 28vw, 140px);
+  .content {
+    align-items: flex-start;
+  }
+
+  .logoContainer {
+    width: 64px;
   }
 
   .headlineInner {

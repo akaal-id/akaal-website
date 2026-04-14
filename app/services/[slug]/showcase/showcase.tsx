@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { PortofolioItem } from "@/content/portofolio";
 import PortofolioCard from "@/components/portofolioCard";
-import styles from "./showcase.module.css";
+import projectStyles from "@/app/home/projects/projects.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,8 +20,8 @@ export default function Showcase({ projects }: ShowcaseProps) {
     const section = sectionRef.current;
     if (!section) return;
 
-    const headerEl = section.querySelector<HTMLElement>(`.${styles.header}`);
-    const cardEls = section.querySelectorAll<HTMLElement>(`.${styles.grid} > *`);
+    const headerEl = section.querySelector<HTMLElement>(`.${projectStyles.header}`);
+    const cardEls = section.querySelectorAll<HTMLElement>(`.${projectStyles.grid} > *`);
 
     if (headerEl) {
       gsap.set(headerEl, { autoAlpha: 0, y: 22 });
@@ -72,12 +72,12 @@ export default function Showcase({ projects }: ShowcaseProps) {
   }, []);
 
   return (
-    <section ref={sectionRef} className={styles.section} aria-label="Selected work">
-      <div className={styles.inner}>
-        <div className={styles.header}>
-          <p className={styles.label}>[ Selected Work ]</p>
+    <section ref={sectionRef} className={projectStyles.projects} aria-label="Selected work">
+      <div className={projectStyles.inner}>
+        <div className={projectStyles.header}>
+          <p className={projectStyles.label}>[ Selected Work ]</p>
         </div>
-        <div className={styles.grid} role="list">
+        <div className={projectStyles.grid} role="list">
           {projects.map((project) => (
             <PortofolioCard key={project.id} project={project} />
           ))}

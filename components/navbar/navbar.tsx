@@ -147,10 +147,10 @@ export default function Navbar() {
                           </span>
                           <ArrowRight className={`${styles.iconSm} ${styles.rowArrow}`} />
                         </Link>
-                        <Link href="/services/tech" className={`${styles.dropdownRowMuted} ${styles.submenuButton}`}>
+                        <Link href="/services/akaalabs" className={`${styles.dropdownRowMuted} ${styles.submenuButton}`}>
                           <span>
                             <span>AKAAL</span>
-                            <span className={styles.dropdownRowAccent}> TECH</span>
+                            <span className={styles.dropdownRowAccent}> LABS</span>
                           </span>
                           <ArrowRight className={`${styles.iconSm} ${styles.rowArrow}`} />
                         </Link>

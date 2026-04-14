@@ -22,6 +22,12 @@ export interface ServiceData {
   showcase: PortofolioItem[];
 }
 
+/** Static page payload (showcase comes from Supabase on the service page). */
+export type ServiceStaticContent = Pick<
+  ServiceData,
+  "hero" | "manifesto" | "capabilities" | "workflow"
+>;
+
 export const creativeData: ServiceData = {
   hero: {
     eyebrow: "Akaal Creative",

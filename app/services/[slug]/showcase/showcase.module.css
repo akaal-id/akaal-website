@@ -8,6 +8,7 @@
 .inner {
   max-width: 1440px;
   margin: 0 auto;
+  
 }
 
 .header {
@@ -25,6 +26,7 @@
 }
 
 .grid {
+  
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: clamp(14px, 2vw, 24px);
