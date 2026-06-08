@@ -26,6 +26,17 @@ async function savePortfolioAction(formData: FormData) {
 
   const preparedData = new FormData();
   const editId = String(formData.get("id") ?? "").trim();
+  const supabase = await createClient();
+
+  let existingProject: PortfolioProject | null = null;
+  if (editId) {
+    const { data } = await supabase
+      .from("portfolios")
+      .select("*")
+      .eq("id", editId)
+      .maybeSingle();
+    existingProject = (data as PortfolioProject | null) ?? null;
+  }
 
   for (const key of ["title", "category", "service_slug"] as const) {
     preparedData.set(key, String(formData.get(key) ?? ""));
@@ -38,7 +49,12 @@ async function savePortfolioAction(formData: FormData) {
 
     const file = formData.get(imageField);
     const existingUrl = String(formData.get(urlField) ?? "").trim();
-    let imageUrl = existingUrl;
+    const storedUrl =
+      (existingProject?.[`image_url_${i as 1 | 2 | 3 | 4 | 5 | 6 | 7}`] as
+        | string
+        | null
+        | undefined) ?? "";
+    let imageUrl = existingUrl || storedUrl;
 
     if (file instanceof File && file.size > 0) {
       imageUrl = await uploadImage(file);

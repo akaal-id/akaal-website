@@ -1,0 +1,147 @@
+/* ── Newsroom Card · Editorial (matches home newsroom) ── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--background);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardWide {
+  grid-column: span 2;
+}
+
+.card:hover {
+  border-color: var(--purple);
+}
+
+.cardMediaWrap {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.3) brightness(0.8);
+  transform: scale(1);
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .cardImage {
+  transform: scale(1.05);
+  filter: saturate(1) brightness(1);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: clamp(20px, 1.5vw, 28px);
+  gap: 16px;
+}
+
+.cardMeta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.cardHeadline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.4vw, 22px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-height: 0;
+}
+
+.cardWide .cardHeadline {
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+
+.card:not(.cardWide) .cardHeadline {
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.cardAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cardActionText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  transition: color 0.4s ease;
+}
+
+.card:hover .cardActionText {
+  color: var(--foreground);
+}
+
+.cardActionArrow {
+  font-size: 16px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.2);
+  transition:
+    color 0.4s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .cardActionArrow {
+  color: var(--purple);
+  transform: translate(4px, -4px);
+}
+
+@media (max-width: 1023px) {
+  .cardMediaWrap {
+    height: 200px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cardWide {
+    grid-column: span 1;
+  }
+
+  .cardMediaWrap {
+    height: 200px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cardImage,
+  .cardActionText,
+  .cardActionArrow {
+    transition: none;
+  }
+}

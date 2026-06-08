@@ -1,9 +1,9 @@
 import Footer from "@/app/home/footer/footer";
 import { getAllProjects } from "@/lib/api/portfolio";
 import { toPortofolioItem } from "@/content/portofolio";
-import PortfolioGrid from "./portfolio-grid";
+import PortfolioGrid from "./portofolio-grid";
 
-export default async function PortofolioPage() {
+export default async function PortfolioPage() {
   const projects = await getAllProjects();
   const items = projects.map(toPortofolioItem);
 

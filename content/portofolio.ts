@@ -1,16 +1,30 @@
+import { toSlug } from "@/lib/utils/slug";
+
 // ---------------------------------------------------------------------------
 // Portfolio types & adapters (client-safe — no server imports)
 // ---------------------------------------------------------------------------
 
-export type PortofolioCategory = "creative" | "labs" | "studio";
+export type PortofolioServiceSlug = "akaalabs" | "creative" | "studio";
+
+export type PortofolioServiceFilter = "all" | "creative" | "labs" | "studio";
 
 export type PortofolioItem = {
   id: string;
   title: string;
-  category: PortofolioCategory;
+  category: string;
+  serviceSlug: PortofolioServiceSlug;
   image: string;
   href: string;
 };
+
+export function matchesPortofolioServiceFilter(
+  serviceSlug: string,
+  filter: PortofolioServiceFilter
+): boolean {
+  if (filter === "all") return true;
+  if (filter === "labs") return serviceSlug === "akaalabs";
+  return serviceSlug === filter;
+}
 
 export interface PortfolioProject {
   id: string;
@@ -38,8 +52,9 @@ export function toPortofolioItem(project: PortfolioProject): PortofolioItem {
   return {
     id: project.id,
     title: project.title,
-    category: project.category as PortofolioCategory,
+    category: project.category,
+    serviceSlug: project.service_slug as PortofolioServiceSlug,
     image: project.image_url_1,
-    href: `/portfolio/${project.id}`,
+    href: `/portfolio/${toSlug(project.title)}`,
   };
 }

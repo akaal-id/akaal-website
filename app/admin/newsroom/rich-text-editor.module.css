@@ -1,0 +1,133 @@
+.editorShell {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  background: #070707;
+  overflow: hidden;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #2a2a2a;
+  background: #0a0a0a;
+}
+
+.toolbarBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #a1a1aa;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.toolbarBtn:hover:not(:disabled) {
+  background: #141414;
+  color: #f5f5f5;
+  border-color: #2a2a2a;
+}
+
+.toolbarBtnActive {
+  background: #141414;
+  color: #f5f5f5;
+  border-color: #3f3f46;
+}
+
+.toolbarBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.toolbarDivider {
+  width: 1px;
+  height: 20px;
+  margin: 0 4px;
+  background: #2a2a2a;
+}
+
+.editorContent {
+  min-height: 320px;
+}
+
+.editorContent :global(.tiptap) {
+  min-height: 320px;
+  padding: 1rem 1.1rem 1.25rem;
+  outline: none;
+  color: #f5f5f5;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.editorContent :global(.tiptap p) {
+  margin: 0 0 0.85rem;
+}
+
+.editorContent :global(.tiptap h2),
+.editorContent :global(.tiptap h3) {
+  margin: 1.25rem 0 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.25;
+  color: #fff;
+}
+
+.editorContent :global(.tiptap h2) {
+  font-size: 1.35rem;
+}
+
+.editorContent :global(.tiptap h3) {
+  font-size: 1.15rem;
+}
+
+.editorContent :global(.tiptap blockquote) {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid #3f3f46;
+  color: #d4d4d8;
+}
+
+.editorContent :global(.tiptap ul),
+.editorContent :global(.tiptap ol) {
+  margin: 0 0 0.85rem;
+  padding-left: 1.25rem;
+}
+
+.editorContent :global(.tiptap li) {
+  margin-bottom: 0.25rem;
+}
+
+.editorContent :global(.tiptap a) {
+  color: #2dd4bf;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.editorContent :global(.tiptap hr) {
+  border: 0;
+  height: 1px;
+  background: #2a2a2a;
+  margin: 1.25rem 0;
+}
+
+.editorContent :global(.tiptap p.is-editor-empty:first-child::before) {
+  content: attr(data-placeholder);
+  float: left;
+  color: #52525b;
+  pointer-events: none;
+  height: 0;
+}

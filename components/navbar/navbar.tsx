@@ -35,6 +35,7 @@ export default function Navbar() {
   const [ecosystemOpen, setEcosystemOpen] = useState(false);
   const activePageName = getActivePageName(pathname);
   const isPortfolioCaseStudy = /^\/portfolio\/[^/]+\/?$/.test(pathname);
+  const isNewsroomArticle = /^\/newsroom\/[^/]+\/?$/.test(pathname);
 
   if (isAdminRoute) return null;
 
@@ -65,11 +66,19 @@ export default function Navbar() {
           <div className={styles.navBlock}>
             {isPortfolioCaseStudy ? (
               <Link
-                href="/portofolio"
+                href="/portfolio"
                 className={`${styles.homeLink} ${styles.portfolioBackLink}`}
               >
                 <ChevronLeft className={styles.portfolioBackIcon} aria-hidden />
                 <span>Back to portfolio</span>
+              </Link>
+            ) : isNewsroomArticle ? (
+              <Link
+                href="/newsroom"
+                className={`${styles.homeLink} ${styles.portfolioBackLink}`}
+              >
+                <ChevronLeft className={styles.portfolioBackIcon} aria-hidden />
+                <span>Back to newsroom</span>
               </Link>
             ) : (
               <Link href="/" className={styles.homeLink}>
@@ -162,7 +171,7 @@ export default function Navbar() {
                 <div className={styles.dropdownMeta}>
                   <div className={styles.dropdownMetaCol}>
                     <Link href="/newsroom" className={styles.dropdownMetaItem}>Newsroom</Link>
-                    <Link href="/portofolio" className={styles.dropdownMetaItem}>Portofolio</Link>
+                    <Link href="/portfolio" className={styles.dropdownMetaItem}>Portofolio</Link>
                   </div>
                   <div className={styles.dropdownMetaCol}>
                     <a href="tel:+62817314245" className={styles.dropdownMetaItem}>[+62] 817 314 245</a>

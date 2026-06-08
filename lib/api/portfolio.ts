@@ -2,6 +2,7 @@ import "server-only";
 import { createClient } from "@/utils/supabase/server";
 import { resolvePortfolioProjectStorageUrls } from "@/utils/supabase/storage-resolve";
 import type { PortfolioProject } from "@/content/portofolio";
+import { toSlug } from "@/lib/utils/slug";
 
 async function withResolvedStorageUrls(
   rows: PortfolioProject[]
@@ -35,6 +36,29 @@ export async function getProjectById(
 
   if (error) return null;
   return resolvePortfolioProjectStorageUrls(data as PortfolioProject);
+}
+
+export async function getProjectBySlug(
+  slug: string
+): Promise<PortfolioProject | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("portfolios").select("*");
+
+  if (error) throw error;
+
+  const matches = (data ?? []).filter(
+    (row) => toSlug((row as PortfolioProject).title) === slug
+  ) as PortfolioProject[];
+
+  if (matches.length === 0) return null;
+
+  if (matches.length > 1 && process.env.NODE_ENV === "development") {
+    console.warn(
+      `[portfolio] slug collision for "${slug}" — using first match (${matches[0].id})`
+    );
+  }
+
+  return resolvePortfolioProjectStorageUrls(matches[0]);
 }
 
 export async function getAllProjects(): Promise<PortfolioProject[]> {

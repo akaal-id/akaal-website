@@ -100,7 +100,7 @@
   z-index: 10;
 
   padding: 24px 24px 32px 24px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0,0,0,0.6);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -134,15 +134,13 @@
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.card:hover .panelCategory {
+/* .card:hover .panelCategory {
   transform: translateX(4px);
-}
+} */
 
 .panelInfo {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
 }
 
 .panelTitle {
@@ -157,22 +155,7 @@
 }
 
 .card:hover .panelTitle {
-  transform: translateX(4px);
-}
-
-.panelArrow {
-  flex-shrink: 0;
-  font-size: 20px;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.4);
-  transition:
-    color 0.4s ease,
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.card:hover .panelArrow {
-  color: var(--purple);
-  transform: translateX(4px);
+  transform: translatey(-4px);
 }
 
 /* ── Section Footer ── */
@@ -244,7 +227,6 @@
   .panel,
   .panelCategory,
   .panelTitle,
-  .panelArrow,
   .viewAll {
     transition: none;
   }

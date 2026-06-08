@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { toSlug } from "@/lib/utils/slug";
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -154,6 +155,8 @@ export async function createPortfolio(formData: FormData) {
 
   revalidatePath("/admin/portfolio");
   revalidatePath("/admin/portofolio");
+  revalidatePath("/portfolio");
+  revalidatePath("/portfolio", "layout");
 }
 
 export async function updatePortfolio(id: string, formData: FormData) {
@@ -167,6 +170,8 @@ export async function updatePortfolio(id: string, formData: FormData) {
 
   revalidatePath("/admin/portfolio");
   revalidatePath("/admin/portofolio");
+  revalidatePath("/portfolio");
+  revalidatePath("/portfolio", "layout");
 }
 
 export async function deletePortfolio(id: string) {
@@ -179,6 +184,76 @@ export async function deletePortfolio(id: string) {
 
   revalidatePath("/admin/portfolio");
   revalidatePath("/admin/portofolio");
+  revalidatePath("/portfolio");
+  revalidatePath("/portfolio", "layout");
+}
+
+type NewsroomMutation = {
+  slug: string;
+  header_text: string;
+  category: string;
+  image: string;
+  paragraph_text: string;
+};
+
+async function buildNewsroomPayload(formData: FormData): Promise<NewsroomMutation> {
+  const headerText = readText(formData, "header_text", true);
+  const slugInput = readText(formData, "slug");
+  const slug = slugInput || toSlug(headerText);
+
+  if (!slug) {
+    throw new Error("A valid slug is required.");
+  }
+
+  return {
+    slug,
+    header_text: headerText,
+    category: readText(formData, "category", true),
+    image: readText(formData, "image"),
+    paragraph_text: readText(formData, "paragraph_text"),
+  };
+}
+
+function revalidateNewsroomPaths() {
+  revalidatePath("/admin/newsroom");
+  revalidatePath("/newsroom");
+  revalidatePath("/newsroom", "layout");
+  revalidatePath("/");
+}
+
+export async function createNewsroom(formData: FormData) {
+  await requireUser();
+  const payload = await buildNewsroomPayload(formData);
+
+  const { error } = await supabaseAdmin.from("newsroom").insert(payload);
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidateNewsroomPaths();
+}
+
+export async function updateNewsroom(id: string, formData: FormData) {
+  await requireUser();
+  const payload = await buildNewsroomPayload(formData);
+
+  const { error } = await supabaseAdmin.from("newsroom").update(payload).eq("id", id);
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidateNewsroomPaths();
+}
+
+export async function deleteNewsroom(id: string) {
+  await requireUser();
+
+  const { error } = await supabaseAdmin.from("newsroom").delete().eq("id", id);
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidateNewsroomPaths();
 }
 
 export async function signOutAction() {

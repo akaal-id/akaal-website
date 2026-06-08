@@ -1,0 +1,88 @@
+/**
+ * Floater — fixed circular button with scroll progress ring (dark theme).
+ * Chevron down at top; chevron up + scroll-to-top when scrolled.
+ */
+
+.floater {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 50;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid hsl(var(--border));
+  background: var(--dark-grey);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.floater:hover {
+  transform: scale(1.05);
+  border-color: rgba(138, 43, 226, 0.45);
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.55),
+    0 0 20px rgba(138, 43, 226, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+.floater:active {
+  transform: scale(0.98);
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ringTrack {
+  stroke: hsl(var(--border));
+  stroke-width: 2;
+}
+
+.ringProgress {
+  stroke: var(--akaal-purple);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--foreground);
+  transform: rotate(0deg);
+  transition: transform var(--transition-smooth);
+}
+
+.iconUp {
+  transform: rotate(180deg);
+}
+
+.iconUp svg {
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .floater {
+    bottom: max(16px, env(safe-area-inset-bottom, 0px));
+    right: max(16px, env(safe-area-inset-right, 0px));
+    width: 48px;
+    height: 48px;
+  }
+}

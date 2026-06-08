@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
     return [
       { source: "/services/tech", destination: "/services/akaalabs", permanent: true },
       { source: "/services/labs", destination: "/services/akaalabs", permanent: true },
+      { source: "/portofolio", destination: "/portfolio", permanent: true },
+      { source: "/portofolio/:path*", destination: "/portfolio/:path*", permanent: true },
     ];
   },
   experimental: {

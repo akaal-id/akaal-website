@@ -4,7 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./admin.module.css";
 
-const ADMIN_MENU = [{ label: "Portfolio", href: "/admin/portofolio" }];
+const ADMIN_MENU = [
+  { label: "Portfolio", href: "/admin/portofolio" },
+  { label: "Newsroom", href: "/admin/newsroom" },
+];
 
 export default function AdminSidebar() {
   const pathname = usePathname();

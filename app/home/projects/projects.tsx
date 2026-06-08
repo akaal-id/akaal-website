@@ -79,9 +79,6 @@ export default function Projects({ items }: ProjectsProps) {
                 </span>
                 <div className={styles.panelInfo}>
                   <h3 className={styles.panelTitle}>{project.title}</h3>
-                  <span className={styles.panelArrow} aria-hidden="true">
-                    ↗
-                  </span>
                 </div>
               </div>
             </a>

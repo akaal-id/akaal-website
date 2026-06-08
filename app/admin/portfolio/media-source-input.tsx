@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Label } from "@/components/ui/label";
 import styles from "./media-source-input.module.css";
 
@@ -22,6 +22,10 @@ export default function MediaSourceInput({
   const inputId = useId();
   const fileId = useId();
   const [value, setValue] = useState(defaultValue);
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   return (
     <div className={styles.wrap}>

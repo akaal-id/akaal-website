@@ -28,9 +28,6 @@ export default function PortofolioCard({
         <span className={projectStyles.panelCategory}>[ {project.category} ]</span>
         <div className={projectStyles.panelInfo}>
           <h2 className={projectStyles.panelTitle}>{project.title}</h2>
-          <span className={projectStyles.panelArrow} aria-hidden="true">
-            ↗
-          </span>
         </div>
       </div>
     </a>

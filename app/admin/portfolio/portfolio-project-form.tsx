@@ -37,6 +37,7 @@ export default function PortfolioProjectForm({
 
   return (
     <form
+      key={editingProject?.id ?? "new"}
       action={saveAction}
       className={styles.formGrid}
       onReset={() => {
@@ -99,6 +100,7 @@ export default function PortfolioProjectForm({
           >
             <div className={styles.mediaField}>
               <MediaSourceInput
+                key={`${editingProject?.id ?? "new"}-image-${i}`}
                 label={`Image ${i} (URL or Upload)`}
                 imageUrlName={`image_url_${i}`}
                 imageFileName={`image_file_${i}`}
@@ -106,7 +108,7 @@ export default function PortfolioProjectForm({
                   (editingProject?.[`image_url_${i as 1 | 2 | 3 | 4 | 5 | 6 | 7}`] as string | null) ??
                   ""
                 }
-                required={i === 1}
+                required={i === 1 && !isEdit}
               />
             </div>
             <div className={styles.field}>

@@ -3,36 +3,41 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import NewsroomCard from "@/components/newsroomCard";
+import type { NewsroomListItem } from "@/content/newsroom";
 import styles from "./newsroom.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const NEWSROOM_ITEMS = [
+const NEWSROOM_ITEMS: NewsroomListItem[] = [
   {
     id: "1",
-    date: "02.04.2026",
-    tag: "PRESS",
-    headline:
-      "AKAAL Launches New Digital Experience Platform for Enterprise Clients",
+    slug: "akaal-digital-platform-launch",
     image: "/images/lab.png",
-    href: "#",
+    headerText:
+      "AKAAL Launches New Digital Experience Platform for Enterprise Clients",
+    category: "PRESS",
+    createdAt: "2026-04-02T00:00:00Z",
+    href: "/newsroom/akaal-digital-platform-launch",
   },
   {
     id: "2",
-    date: "18.02.2026",
-    tag: "CASE STUDY",
-    headline:
-      "Behind the Rebrand: How We Transformed Indo Pacific's Visual Identity",
+    slug: "indo-pacific-rebrand-case-study",
     image: "/images/lab.png",
-    href: "#",
+    headerText:
+      "Behind the Rebrand: How We Transformed Indo Pacific's Visual Identity",
+    category: "CASE STUDY",
+    createdAt: "2026-02-18T00:00:00Z",
+    href: "/newsroom/indo-pacific-rebrand-case-study",
   },
   {
     id: "3",
-    date: "05.01.2026",
-    tag: "PRODUCT",
-    headline: "AKAAL Labs Introduces AI-Powered Content Automation Suite",
+    slug: "akaal-labs-ai-content-suite",
     image: "/images/lab.png",
-    href: "#",
+    headerText: "AKAAL Labs Introduces AI-Powered Content Automation Suite",
+    category: "PRODUCT",
+    createdAt: "2026-01-05T00:00:00Z",
+    href: "/newsroom/akaal-labs-ai-content-suite",
   },
 ];
 
@@ -43,7 +48,7 @@ export default function Newsroom() {
     const section = sectionRef.current;
     if (!section) return;
 
-    const cards = section.querySelectorAll<HTMLElement>(`.${styles.card}`);
+    const cards = section.querySelectorAll<HTMLElement>("[data-newsroom-card]");
     gsap.set(cards, { opacity: 0, y: 30 });
 
     const tl = gsap.to(cards, {
@@ -79,39 +84,15 @@ export default function Newsroom() {
         </div>
 
         <div className={styles.grid}>
-          {/* Row 1: wide card + normal card */}
-          {NEWSROOM_ITEMS.slice(0, 2).map((item, i) => (
-            <a
-              key={item.id}
-              href={item.href}
-              className={`${styles.card} ${i === 0 ? styles.cardWide : ""}`}
-            >
-              <div className={styles.cardMediaWrap}>
-                <img
-                  className={styles.cardImage}
-                  src={item.image}
-                  alt=""
-                  loading="lazy"
-                  draggable={false}
-                />
-              </div>
-              <div className={styles.cardContent}>
-                <span className={styles.cardMeta}>
-                  [ {item.date} ] /// {item.tag}
-                </span>
-                <h3 className={styles.cardHeadline}>{item.headline}</h3>
-                <div className={styles.cardAction}>
-                  <span className={styles.cardActionText}>Read Article</span>
-                  <span className={styles.cardActionArrow} aria-hidden="true">
-                    ↗
-                  </span>
-                </div>
-              </div>
-            </a>
+          {NEWSROOM_ITEMS.slice(0, 2).map((item, index) => (
+            <NewsroomCard key={item.id} item={item} isWide={index === 0} />
           ))}
 
-          {/* Row 2: CTA card + wide card */}
-          <a href="/newsroom" className={`${styles.card} ${styles.cardCta}`}>
+          <a
+            href="/newsroom"
+            className={`${styles.card} ${styles.cardCta}`}
+            data-newsroom-card=""
+          >
             <div className={styles.ctaInner}>
               <span className={styles.ctaText}>View More</span>
               <svg
@@ -134,33 +115,7 @@ export default function Newsroom() {
           </a>
 
           {NEWSROOM_ITEMS.slice(2).map((item) => (
-            <a
-              key={item.id}
-              href={item.href}
-              className={`${styles.card} ${styles.cardWide}`}
-            >
-              <div className={styles.cardMediaWrap}>
-                <img
-                  className={styles.cardImage}
-                  src={item.image}
-                  alt=""
-                  loading="lazy"
-                  draggable={false}
-                />
-              </div>
-              <div className={styles.cardContent}>
-                <span className={styles.cardMeta}>
-                  [ {item.date} ] /// {item.tag}
-                </span>
-                <h3 className={styles.cardHeadline}>{item.headline}</h3>
-                <div className={styles.cardAction}>
-                  <span className={styles.cardActionText}>Read Article</span>
-                  <span className={styles.cardActionArrow} aria-hidden="true">
-                    ↗
-                  </span>
-                </div>
-              </div>
-            </a>
+            <NewsroomCard key={item.id} item={item} isWide />
           ))}
         </div>
       </div>

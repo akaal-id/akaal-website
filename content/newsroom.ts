@@ -15,6 +15,7 @@ export interface NewsroomListItem {
   headerText: string;
   category: string;
   createdAt: string;
+  href: string;
 }
 
 export function toNewsroomListItem(item: NewsroomContent): NewsroomListItem {
@@ -25,5 +26,6 @@ export function toNewsroomListItem(item: NewsroomContent): NewsroomListItem {
     headerText: item.header_text,
     category: item.category,
     createdAt: item.created_at,
+    href: `/newsroom/${item.slug}`,
   };
 }

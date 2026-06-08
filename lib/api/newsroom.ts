@@ -1,16 +1,15 @@
 import "server-only";
 import { createClient } from "@/utils/supabase/server";
 import type { NewsroomContent } from "@/content/newsroom";
+import { toSlug } from "@/lib/utils/slug";
 
 type NewsroomRow = Record<string, unknown>;
 
-function toSlug(value: string): string {
-  return value
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
+function isMissingNewsroomTable(error: { code?: string; message?: string }): boolean {
+  return (
+    error.code === "PGRST205" ||
+    (error.message?.includes("Could not find the table") ?? false)
+  );
 }
 
 function asString(value: unknown): string {
@@ -49,7 +48,10 @@ export async function getAllNewsroomContent(): Promise<NewsroomContent[]> {
     .select("*")
     .order("created_at", { ascending: false });
 
-  if (error) throw error;
+  if (error) {
+    if (isMissingNewsroomTable(error)) return [];
+    throw error;
+  }
   return (data ?? []).map((row) => normalizeNewsroomRow(row as NewsroomRow));
 }
 
@@ -63,6 +65,10 @@ export async function getNewsroomContentBySlug(
     .eq("slug", slug)
     .maybeSingle();
 
-  if (error || !data) return null;
+  if (error) {
+    if (isMissingNewsroomTable(error)) return null;
+    throw error;
+  }
+  if (!data) return null;
   return normalizeNewsroomRow(data as NewsroomRow);
 }
