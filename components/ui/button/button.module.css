@@ -2,7 +2,7 @@
   border: 0;
   border-radius: 4px;
   background: var(--purple);
-  color: var(--white);
+  color: #ffffff;
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 600;
@@ -43,11 +43,13 @@
 }
 
 .simple {
-  background: #101010;
+  background: var(--background);
+  color: var(--foreground);
   box-shadow: none;
-  border: 1px solid #222;
+  border: 1px solid hsl(var(--border));
 }
 
 .simple:hover {
   box-shadow: none;
+  border-color: var(--glow-purple-border);
 }

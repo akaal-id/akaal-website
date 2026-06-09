@@ -6,8 +6,8 @@
   flex-wrap: wrap;
   padding: 16px 20px;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
@@ -29,14 +29,14 @@
 }
 
 .pageButton:hover:not(:disabled) {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.05);
+  color: var(--foreground);
+  background: var(--surface-hover);
 }
 
 .pageButtonActive {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--foreground);
+  background: var(--glass-border);
+  border-color: var(--border-strong);
 }
 
 .pageButton:disabled {

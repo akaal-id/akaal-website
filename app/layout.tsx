@@ -4,6 +4,8 @@ import Navbar from "@/components/navbar";
 import Floater from "@/components/floater";
 import PageTransition from "@/components/page-transition";
 import SmoothScroll from "@/components/smooth-scroll";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import ThemeScript from "@/components/theme/theme-script";
 import {
   SITE_DESCRIPTION,
   SITE_LOGO,
@@ -75,15 +77,19 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${plusJakartaSans.variable} ${geist.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
     >
       <body>
-        <SmoothScroll>
-          <Navbar />
-          {children}
-          <Footer />
-          <Floater />
-          <PageTransition />
-        </SmoothScroll>
+        <ThemeScript />
+        <ThemeProvider>
+          <SmoothScroll>
+            <Navbar />
+            {children}
+            <Footer />
+            <Floater />
+            <PageTransition />
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

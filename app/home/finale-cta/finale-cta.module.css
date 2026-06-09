@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   padding: clamp(48px, 8vh, 96px) var(--container-pad-x);
-  background: #050505;
+  background: var(--background);
   overflow: hidden;
 }
 
@@ -19,7 +19,7 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: 0.95;
+  opacity: var(--canvas-opacity);
 }
 
 .canvas canvas {
@@ -95,7 +95,7 @@
   position: absolute;
   inset: 0;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--cta-frame-border);
   pointer-events: none;
   transition:
     border-color var(--transition-fast),
@@ -105,9 +105,9 @@
 
 .assembly:hover .frame {
   transform: scale(1.035);
-  border-color: rgba(255, 255, 255, 0.92);
+  border-color: var(--glow-purple-border);
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 0 1px var(--glass-border),
     0 0 48px rgba(138, 43, 226, 0.12);
 }
 
@@ -121,10 +121,10 @@
   gap: 20px;
   padding: 8px 8px 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-hover);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px var(--border-subtle);
 }
 
 /* Floating purple polyhedron (CSS 3D cube) */
@@ -159,8 +159,8 @@
   border: 1px solid color-mix(in srgb, var(--akaal-purple) 55%, transparent);
   background: linear-gradient(
     145deg,
-    color-mix(in srgb, var(--akaal-purple) 88%, #000) 0%,
-    color-mix(in srgb, var(--akaal-purple) 45%, #0a0a12) 100%
+    color-mix(in srgb, var(--akaal-purple) 88%, var(--background)) 0%,
+    color-mix(in srgb, var(--akaal-purple) 45%, var(--dark-grey)) 100%
   );
   opacity: 0.92;
 }
@@ -214,7 +214,7 @@
 }
 
 .ctaLink:hover {
-  color: #ffffff;
+  color: var(--akaal-purple);
 }
 
 .ctaLink:focus-visible {

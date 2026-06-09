@@ -19,8 +19,8 @@
 }
 
 .gridItem {
-  background-color: #0a0a0a;
-  border: 1px solid #050505;
+  background-color: var(--page-transition-bg);
+  border: 1px solid var(--page-transition-border);
   opacity: 0;
   transform: scale(0);
   transform-origin: center;

@@ -3,7 +3,7 @@
 .section {
   position: relative;
   padding: clamp(100px, 20vh, 260px) var(--container-pad-x);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--border-subtle);
   overflow: hidden;
 }
 
@@ -57,12 +57,13 @@
   font-weight: 500;
   line-height: 1.28;
   letter-spacing: -0.03em;
-  color: #222;
+  color: var(--foreground);
 }
 
 .word {
   display: inline;
   will-change: color;
+  color: var(--text-muted-alpha);
 }
 
 /* ── Responsive ── */

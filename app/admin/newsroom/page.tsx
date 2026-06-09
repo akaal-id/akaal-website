@@ -1,14 +1,5 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import {
   createNewsroom,
   deleteNewsroom,
@@ -18,7 +9,7 @@ import {
 import type { NewsroomContent } from "@/content/newsroom";
 import { createClient } from "@/utils/supabase/server";
 import NewsroomArticleForm from "./newsroom-article-form";
-import styles from "./newsroom.module.css";
+import cms from "../cms.module.css";
 
 async function saveNewsroomAction(formData: FormData) {
   "use server";
@@ -85,17 +76,18 @@ export default async function NewsroomAdminPage({
   if (error) {
     if (error.code === "PGRST205") {
       return (
-        <main className={styles.newsroomPage}>
-          <section className={styles.panel}>
-            <header className={styles.panelHeader}>
-              <h2 className={styles.panelTitle}>Newsroom</h2>
-            </header>
-            <div className={styles.tableWrap}>
-              <p className={styles.empty}>
-                Run supabase/newsroom.sql in your Supabase SQL Editor first.
-              </p>
+        <main className={cms.page}>
+          <header className={cms.pageHeader}>
+            <div className={cms.metaGlass}>
+              <span>CMS</span>
+              <span className={cms.metaAccent}>·</span>
+              <span>Newsroom</span>
             </div>
-          </section>
+            <h1 className={cms.pageTitle}>Newsroom</h1>
+          </header>
+          <p className={cms.emptyState}>
+            Run supabase/newsroom.sql in your Supabase SQL Editor first.
+          </p>
         </main>
       );
     }
@@ -108,82 +100,98 @@ export default async function NewsroomAdminPage({
   );
 
   return (
-    <main className={styles.newsroomPage}>
-      <section className={styles.panel}>
-        <header className={styles.panelHeader}>
-          <h2 className={styles.panelTitle}>Newsroom Articles</h2>
-          <div className={styles.panelControls}>
-            <p className={styles.panelMeta}>{articles.length} articles</p>
-            <a href="/admin/newsroom" className={styles.resetLink}>
-              Reset Form
-            </a>
+    <main className={cms.page}>
+      <header className={cms.pageHeader}>
+        <div className={cms.metaGlass}>
+          <span>CMS</span>
+          <span className={cms.metaAccent}>·</span>
+          <span>Newsroom</span>
+        </div>
+        <h1 className={cms.pageTitle}>Editorial</h1>
+        <p className={cms.pageDescription}>
+          Publish articles, press releases, and announcements to the newsroom.
+        </p>
+      </header>
+
+      <div className={cms.workspace}>
+        <aside className={cms.listColumn}>
+          <div className={cms.listHeader}>
+            <h2 className={cms.listTitle}>All Articles</h2>
+            <span className={cms.listCount}>{articles.length}</span>
           </div>
-        </header>
-        <div className={styles.tableWrap}>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className={styles.colImage}>Image</TableHead>
-                <TableHead>Header</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>Slug</TableHead>
-                <TableHead className={styles.colActions}>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {articles.map((article) => (
-                <TableRow key={article.id}>
-                  <TableCell>
+          <ul className={cms.entryList}>
+            {articles.length === 0 ? (
+              <li className={cms.emptyState}>No articles yet</li>
+            ) : (
+              articles.map((article) => {
+                const isActive = editingArticle?.id === article.id;
+
+                return (
+                  <li
+                    key={article.id}
+                    className={`${cms.entryCard} ${isActive ? cms.entryCardActive : ""}`}
+                  >
                     {article.image ? (
-                      <>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          className={styles.thumb}
-                          src={article.image}
-                          alt={article.header_text}
-                        />
-                      </>
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        className={cms.entryThumb}
+                        src={article.image}
+                        alt=""
+                      />
                     ) : (
-                      <span className={styles.empty}>No Image</span>
+                      <div className={`${cms.entryThumb} ${cms.entryThumbEmpty}`}>
+                        None
+                      </div>
                     )}
-                  </TableCell>
-                  <TableCell className={styles.articleTitleCell}>
-                    {article.header_text}
-                  </TableCell>
-                  <TableCell>
-                    <span className={styles.tag}>{article.category}</span>
-                  </TableCell>
-                  <TableCell>{article.slug}</TableCell>
-                  <TableCell className={styles.colActions}>
-                    <div className={styles.tableActions}>
-                      <Link href={`/admin/newsroom?edit=${article.id}`}>
-                        <Button variant="outline">Edit</Button>
+                    <div className={cms.entryBody}>
+                      <p className={cms.entryTitle}>{article.header_text}</p>
+                      <div className={cms.entryMeta}>
+                        <span className={cms.tag}>{article.category}</span>
+                        <span className={`${cms.tag} ${cms.tagMuted}`}>
+                          {article.slug}
+                        </span>
+                      </div>
+                    </div>
+                    <div className={cms.entryActions}>
+                      <Link
+                        href={`/admin/newsroom?edit=${article.id}`}
+                        className={cms.iconBtn}
+                        title="Edit"
+                      >
+                        Ed
                       </Link>
                       <form action={deleteNewsroom.bind(null, article.id)}>
-                        <Button type="submit" variant="destructive">
-                          Delete
-                        </Button>
+                        <button
+                          type="submit"
+                          className={`${cms.iconBtn} ${cms.iconBtnDanger}`}
+                          title="Delete"
+                        >
+                          Del
+                        </button>
                       </form>
                     </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </section>
+                  </li>
+                );
+              })
+            )}
+          </ul>
+        </aside>
 
-      <section className={styles.panel}>
-        <header className={styles.panelHeader}>
-          <h2 className={styles.panelTitle}>
-            {editingArticle ? "Edit Article" : "Add New Article"}
-          </h2>
-        </header>
-        <NewsroomArticleForm
-          saveAction={saveNewsroomAction}
-          editingArticle={editingArticle}
-        />
-      </section>
+        <section className={cms.editorColumn}>
+          <header className={cms.editorHeader}>
+            <h2 className={cms.editorTitle}>
+              {editingArticle ? "Edit Article" : "New Article"}
+            </h2>
+            <a href="/admin/newsroom" className={cms.resetLink}>
+              Reset
+            </a>
+          </header>
+          <NewsroomArticleForm
+            saveAction={saveNewsroomAction}
+            editingArticle={editingArticle}
+          />
+        </section>
+      </div>
     </main>
   );
 }

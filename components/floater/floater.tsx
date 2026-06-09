@@ -4,7 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useLenis } from "lenis/react";
 import { ChevronDown } from "lucide-react";
+import ThemeToggle from "./theme-toggle";
 import styles from "./floater.module.css";
+import stackStyles from "./floater-stack.module.css";
 
 const CIRCLE_R = 45;
 const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * CIRCLE_R;
@@ -14,11 +16,8 @@ const SCROLL_LEAVE_TOP = 48;
 
 const LERP_FACTOR = 0.12;
 
-export default function Floater() {
-  const pathname = usePathname();
+function ScrollFloater() {
   const lenis = useLenis();
-  const isAdminRoute =
-    pathname.startsWith("/admin") || pathname.startsWith("/app/admin");
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [displayProgress, setDisplayProgress] = useState(0);
@@ -100,8 +99,6 @@ export default function Floater() {
     return () => cancelAnimationFrame(rafId);
   }, []);
 
-  if (isAdminRoute) return null;
-
   const handleClick = () => {
     if (!isScrolled) return;
     if (lenis) {
@@ -116,7 +113,7 @@ export default function Floater() {
   return (
     <button
       type="button"
-      className={styles.floater}
+      className={styles.floaterButton}
       onClick={handleClick}
       aria-label={isScrolled ? "Scroll to top" : "Scroll progress"}
       title={isScrolled ? "Scroll to top" : "Scroll progress"}
@@ -147,5 +144,20 @@ export default function Floater() {
         <ChevronDown size={24} strokeWidth={2} />
       </span>
     </button>
+  );
+}
+
+export default function Floater() {
+  const pathname = usePathname();
+  const isAdminRoute =
+    pathname.startsWith("/admin") || pathname.startsWith("/app/admin");
+
+  if (isAdminRoute) return null;
+
+  return (
+    <div className={stackStyles.stack}>
+      <ThemeToggle />
+      <ScrollFloater />
+    </div>
   );
 }

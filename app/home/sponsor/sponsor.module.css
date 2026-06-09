@@ -2,10 +2,10 @@
   position: relative;
   z-index: 30;
   width: 100%;
-  border-top: 1px solid rgb(255 255 255 / 12%);
-  border-bottom: 1px solid rgb(255 255 255 / 12%);
+  border-top: 1px solid var(--border-muted);
+  border-bottom: 1px solid var(--border-muted);
   overflow: hidden;
-  background: var(--black);
+  background: var(--background);
   padding: 24px var(--container-pad-x);
 }
 
@@ -21,7 +21,7 @@
   gap: 28px;
   padding: 12px 0;
   animation: sponsorMarquee 240s linear infinite;
-  background-color: var(--black);
+  background-color: var(--background);
 }
 
 .logo {
@@ -29,7 +29,7 @@
   width: auto;
   object-fit: contain;
   flex: 0 0 auto;
-  filter: grayscale(1) invert(1) brightness(1.2);
+  filter: var(--sponsor-logo-filter);
   opacity: 1;
   user-select: none;
 }

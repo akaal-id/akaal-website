@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { NewsroomContent } from "@/content/newsroom";
+import cms from "../cms.module.css";
 import MediaSourceInput from "../portfolio/media-source-input";
 import RichTextEditor from "./rich-text-editor";
-import styles from "./newsroom.module.css";
 
 type NewsroomArticleFormProps = {
   saveAction: (formData: FormData) => Promise<void>;
@@ -24,12 +24,12 @@ export default function NewsroomArticleForm({
     <form
       key={editingArticle?.id ?? "new"}
       action={saveAction}
-      className={styles.formGrid}
+      className={cms.formGrid}
     >
       <input type="hidden" name="id" defaultValue={editingArticle?.id ?? ""} />
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
+      <div className={`${cms.formRow} ${cms.formRow2}`}>
+        <div className={cms.field}>
           <Label htmlFor="header_text">Header Text</Label>
           <Input
             id="header_text"
@@ -38,7 +38,7 @@ export default function NewsroomArticleForm({
             required
           />
         </div>
-        <div className={styles.field}>
+        <div className={cms.field}>
           <Label htmlFor="slug">Slug</Label>
           <Input
             id="slug"
@@ -49,8 +49,8 @@ export default function NewsroomArticleForm({
         </div>
       </div>
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
+      <div className={`${cms.formRow} ${cms.formRow2}`}>
+        <div className={cms.field}>
           <Label htmlFor="category">Category</Label>
           <Input
             id="category"
@@ -60,7 +60,7 @@ export default function NewsroomArticleForm({
             required
           />
         </div>
-        <div className={styles.mediaField}>
+        <div className={cms.mediaField}>
           <MediaSourceInput
             key={`${editingArticle?.id ?? "new"}-image`}
             label="Hero Image (URL or Upload)"
@@ -71,7 +71,7 @@ export default function NewsroomArticleForm({
         </div>
       </div>
 
-      <div className={styles.field}>
+      <div className={cms.field}>
         <Label htmlFor="paragraph_text">Body</Label>
         <RichTextEditor
           key={editingArticle?.id ?? "new-body"}
@@ -80,17 +80,17 @@ export default function NewsroomArticleForm({
         />
       </div>
 
-      <div className={styles.actions}>
+      <div className={cms.actions}>
         <Button type="submit">
           {editingArticle ? "Update Article" : "Create Article"}
         </Button>
         <Button type="reset" variant="outline">
-          Clear Fields
+          Clear
         </Button>
         {isEdit ? (
           <Link href="/admin/newsroom">
             <Button type="button" variant="ghost">
-              Cancel Edit
+              Cancel
             </Button>
           </Link>
         ) : null}

@@ -4,9 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUp } from "lucide-react";
-import { SITE_DESCRIPTION } from "@/lib/constants/brand";
-
-const FOOTER_LOGO = "/images/logo-fullcolor-negative-rgb copy.png";
+import { SITE_DESCRIPTION, SITE_LOGO_NEGATIVE, SITE_LOGO_POSITIVE } from "@/lib/constants/brand";
+import { useTheme } from "@/components/theme/theme-provider";
 import styles from "./footer.module.css";
 
 const NAV_LINKS = [
@@ -32,8 +31,11 @@ const CONNECT_LINKS = [
 
 export default function Footer() {
   const pathname = usePathname();
+  const { theme } = useTheme();
   const isAdminRoute =
     pathname.startsWith("/admin") || pathname.startsWith("/app/admin");
+  const footerLogo =
+    theme === "dark" ? SITE_LOGO_NEGATIVE : SITE_LOGO_POSITIVE;
 
   if (isAdminRoute) return null;
 
@@ -47,7 +49,7 @@ export default function Footer() {
           <div className={styles.column}>
             <Link href="/" className={styles.logoLink} aria-label="Akaal — Home">
               <Image
-                src={FOOTER_LOGO}
+                src={footerLogo}
                 alt="Akaal"
                 width={120}
                 height={32}

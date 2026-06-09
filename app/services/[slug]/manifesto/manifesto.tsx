@@ -5,6 +5,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { ServiceData } from "@/content/services/creative";
 import styles from "./manifesto.module.css";
+import { useTheme } from "@/components/theme/theme-provider";
+import { getWordScrubColors } from "@/lib/theme/word-scrub";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,6 +34,7 @@ type ManifestoProps = {
 export default function Manifesto({ data }: ManifestoProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const el = textRef.current;
@@ -58,10 +61,13 @@ export default function Manifesto({ data }: ManifestoProps) {
     el.innerHTML = buildWordSpans(data.text, styles.word);
 
     const wordEls = el.querySelectorAll<HTMLSpanElement>(`.${styles.word}`);
-    gsap.set(wordEls, { color: "#222" });
+    const { start, end } = getWordScrubColors();
+    if (!start || !end) return;
+
+    gsap.set(wordEls, { color: start });
 
     const tween = gsap.to(wordEls, {
-      color: "#c4c4c4",
+      color: end,
       stagger: 0.04,
       scrollTrigger: {
         trigger: section,
@@ -72,13 +78,14 @@ export default function Manifesto({ data }: ManifestoProps) {
     });
 
     return () => {
+      gsap.set(wordEls, { clearProps: "color" });
       tween.scrollTrigger?.kill();
       tween.kill();
       ScrollTrigger.getAll()
         .filter((st) => st.trigger === section)
         .forEach((st) => st.kill());
     };
-  }, [data.text]);
+  }, [data.text, theme]);
 
   return (
     <section

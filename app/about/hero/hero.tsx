@@ -11,12 +11,15 @@ import {
 } from "@/content/about";
 import shared from "@/app/home/about/about.module.css";
 import styles from "./hero.module.css";
+import { useTheme } from "@/components/theme/theme-provider";
+import { getWordScrubColors } from "@/lib/theme/word-scrub";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const el = textRef.current;
@@ -26,10 +29,13 @@ export default function Hero() {
     el.innerHTML = buildAboutStatementInnerHTML(shared.word, shared.emphasisWord);
 
     const wordEls = el.querySelectorAll<HTMLSpanElement>(`.${shared.word}`);
-    gsap.set(wordEls, { color: "#222" });
+    const { start, end } = getWordScrubColors();
+    if (!start || !end) return;
+
+    gsap.set(wordEls, { color: start });
 
     const tween = gsap.to(wordEls, {
-      color: "#c4c4c4",
+      color: end,
       stagger: 0.04,
       scrollTrigger: {
         trigger: section,
@@ -39,11 +45,14 @@ export default function Hero() {
       },
     });
 
+    ScrollTrigger.refresh();
+
     return () => {
+      gsap.set(wordEls, { clearProps: "color" });
       tween.scrollTrigger?.kill();
       tween.kill();
     };
-  }, []);
+  }, [theme]);
 
   return (
     <section ref={sectionRef} className={styles.hero} aria-label="About">

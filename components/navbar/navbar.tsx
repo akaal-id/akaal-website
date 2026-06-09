@@ -15,6 +15,7 @@ import {
   Mail,
 } from "lucide-react";
 import styles from "./navbar.module.css";
+import { SITE_LOGO_NEGATIVE } from "@/lib/constants/brand";
 
 function getActivePageName(pathname: string): string {
   if (pathname === "/") return "Home";
@@ -53,7 +54,7 @@ export default function Navbar() {
     >
       <div className={styles.logoContainer}>
         <Image 
-          src="/images/logo-fullcolor-negative-rgb copy.png" 
+          src={SITE_LOGO_NEGATIVE} 
           alt="Akaal Logo" 
           width={120}
           height={32}

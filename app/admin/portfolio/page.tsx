@@ -1,14 +1,5 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import {
   createPortfolio,
   deletePortfolio,
@@ -19,7 +10,7 @@ import type { PortfolioProject } from "@/content/portofolio";
 import { createClient } from "@/utils/supabase/server";
 import { resolveStorageUrlForDisplay } from "@/utils/supabase/storage-resolve";
 import PortfolioProjectForm from "./portfolio-project-form";
-import styles from "./portfolio.module.css";
+import cms from "../cms.module.css";
 
 async function savePortfolioAction(formData: FormData) {
   "use server";
@@ -101,86 +92,104 @@ export default async function PortfolioAdminPage({
   const tableThumbSrc = await Promise.all(
     projects.map((p) => resolveStorageUrlForDisplay(p.image_url_1))
   );
-  const editingProject = projects.find((project) => project.id === resolvedSearchParams.edit);
+  const editingProject = projects.find(
+    (project) => project.id === resolvedSearchParams.edit
+  );
 
   return (
-    <main className={styles.portfolioPage}>
-      <section className={styles.panel}>
-        <header className={styles.panelHeader}>
-          <h2 className={styles.panelTitle}>Portfolio Entries</h2>
-          <div className={styles.panelControls}>
-            <p className={styles.panelMeta}>{projects.length} projects</p>
-            <a href="/admin/portofolio" className={styles.resetLink}>
-              Reset Form
-            </a>
+    <main className={cms.page}>
+      <header className={cms.pageHeader}>
+        <div className={cms.metaGlass}>
+          <span>CMS</span>
+          <span className={cms.metaAccent}>·</span>
+          <span>Portfolio</span>
+        </div>
+        <h1 className={cms.pageTitle}>Featured Works</h1>
+        <p className={cms.pageDescription}>
+          Manage case studies, project galleries, and portfolio entries shown across the site.
+        </p>
+      </header>
+
+      <div className={cms.workspace}>
+        <aside className={cms.listColumn}>
+          <div className={cms.listHeader}>
+            <h2 className={cms.listTitle}>All Projects</h2>
+            <span className={cms.listCount}>{projects.length}</span>
           </div>
-        </header>
-        <div className={styles.tableWrap}>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className={styles.colImage}>Image</TableHead>
-                <TableHead>Title</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>Service</TableHead>
-                <TableHead className={styles.colActions}>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {projects.map((project, rowIndex) => (
-                <TableRow key={project.id}>
-                  <TableCell>
-                    {project.image_url_1 ? (
-                      <>
-                        {/* CMS supports arbitrary external storage URLs for thumbnails. */}
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          className={styles.thumb}
-                          src={tableThumbSrc[rowIndex] ?? project.image_url_1}
-                          alt={project.title}
-                        />
-                      </>
+          <ul className={cms.entryList}>
+            {projects.length === 0 ? (
+              <li className={cms.emptyState}>No projects yet</li>
+            ) : (
+              projects.map((project, rowIndex) => {
+                const isActive = editingProject?.id === project.id;
+                const thumbSrc = tableThumbSrc[rowIndex] ?? project.image_url_1;
+
+                return (
+                  <li
+                    key={project.id}
+                    className={`${cms.entryCard} ${isActive ? cms.entryCardActive : ""}`}
+                  >
+                    {thumbSrc ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        className={cms.entryThumb}
+                        src={thumbSrc}
+                        alt=""
+                      />
                     ) : (
-                      <span className={styles.empty}>No Image</span>
+                      <div className={`${cms.entryThumb} ${cms.entryThumbEmpty}`}>
+                        None
+                      </div>
                     )}
-                  </TableCell>
-                  <TableCell className={styles.projectTitleCell}>{project.title}</TableCell>
-                  <TableCell>
-                    <span className={styles.tag}>{project.category}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span className={styles.tag}>{project.service_slug}</span>
-                  </TableCell>
-                  <TableCell className={styles.colActions}>
-                    <div className={styles.tableActions}>
-                      <Link href={`/admin/portofolio?edit=${project.id}`}>
-                        <Button variant="outline">Edit</Button>
+                    <div className={cms.entryBody}>
+                      <p className={cms.entryTitle}>{project.title}</p>
+                      <div className={cms.entryMeta}>
+                        <span className={cms.tag}>{project.category}</span>
+                        <span className={`${cms.tag} ${cms.tagMuted}`}>
+                          {project.service_slug}
+                        </span>
+                      </div>
+                    </div>
+                    <div className={cms.entryActions}>
+                      <Link
+                        href={`/admin/portofolio?edit=${project.id}`}
+                        className={cms.iconBtn}
+                        title="Edit"
+                      >
+                        Ed
                       </Link>
                       <form action={deletePortfolio.bind(null, project.id)}>
-                        <Button type="submit" variant="destructive">
-                          Delete
-                        </Button>
+                        <button
+                          type="submit"
+                          className={`${cms.iconBtn} ${cms.iconBtnDanger}`}
+                          title="Delete"
+                        >
+                          Del
+                        </button>
                       </form>
                     </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </section>
+                  </li>
+                );
+              })
+            )}
+          </ul>
+        </aside>
 
-      <section className={styles.panel}>
-        <header className={styles.panelHeader}>
-          <h2 className={styles.panelTitle}>
-            {editingProject ? "Edit Project" : "Add New Project"}
-          </h2>
-        </header>
-        <PortfolioProjectForm
-          saveAction={savePortfolioAction}
-          editingProject={editingProject}
-        />
-      </section>
+        <section className={cms.editorColumn}>
+          <header className={cms.editorHeader}>
+            <h2 className={cms.editorTitle}>
+              {editingProject ? "Edit Project" : "New Project"}
+            </h2>
+            <a href="/admin/portofolio" className={cms.resetLink}>
+              Reset
+            </a>
+          </header>
+          <PortfolioProjectForm
+            saveAction={savePortfolioAction}
+            editingProject={editingProject}
+          />
+        </section>
+      </div>
     </main>
   );
 }

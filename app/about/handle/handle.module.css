@@ -62,7 +62,7 @@
   line-height: 1.4;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 0.65);
+  color: var(--text-secondary);
 }
 
 .headline {
@@ -72,7 +72,7 @@
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: -1px;
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .intro {
@@ -88,7 +88,7 @@
 .steps {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .stepRow {
@@ -97,7 +97,7 @@
   align-items: baseline;
   column-gap: 40px;
   padding: 40px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-subtle);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
 }
@@ -112,7 +112,7 @@
   font-size: 24px;
   font-weight: 400;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.2);
+  color: var(--text-faint);
 }
 
 .title {
@@ -123,16 +123,14 @@
   font-weight: 500;
   line-height: 0.98;
   letter-spacing: -2px;
-  color: rgb(255 255 255 / 0.4);
+  color: var(--text-muted-alpha);
   transform: translateX(0px);
   transition: color 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-
-  max-width: 1ch;
 }
 
 .titleActive {
-  color: var(--white);
+  color: var(--foreground);
   transform: translateX(20px);
 }
 
@@ -143,8 +141,33 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 1.6;
-  color: rgb(255 255 255 / 0.6);
+  color: var(--text-body);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:global([data-theme="light"]) .stepRowDimmed {
+  opacity: 0.38;
+}
+
+:global([data-theme="light"]) .bgCreative {
+  background:
+    radial-gradient(circle at 22% 30%, rgba(139, 92, 246, 0.14) 0%, transparent 58%),
+    radial-gradient(circle at 80% 75%, rgba(76, 29, 149, 0.1) 0%, transparent 60%),
+    var(--background);
+}
+
+:global([data-theme="light"]) .bgMarketing {
+  background:
+    radial-gradient(circle at 72% 28%, rgba(34, 211, 238, 0.12) 0%, transparent 56%),
+    radial-gradient(circle at 20% 78%, rgba(13, 148, 136, 0.1) 0%, transparent 60%),
+    var(--background);
+}
+
+:global([data-theme="light"]) .bgBranding {
+  background:
+    radial-gradient(circle at 50% 36%, rgba(59, 130, 246, 0.12) 0%, transparent 56%),
+    radial-gradient(circle at 18% 80%, rgba(30, 58, 138, 0.1) 0%, transparent 62%),
+    var(--background);
 }
 
 @media (max-width: 1024px) {

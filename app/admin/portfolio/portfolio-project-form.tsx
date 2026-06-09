@@ -8,14 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { PortfolioProject } from "@/content/portofolio";
+import cms from "../cms.module.css";
 import MediaSourceInput from "./media-source-input";
 import styles from "./portfolio.module.css";
 
 type ServiceSlug = "akaalabs" | "creative" | "studio";
 
 const serviceOptions: ServiceSlug[] = ["akaalabs", "creative", "studio"];
-
-const MAX_GALLERY_ROWS = 7;
 
 type PortfolioProjectFormProps = {
   saveAction: (formData: FormData) => Promise<void>;
@@ -28,26 +27,26 @@ export default function PortfolioProjectForm({
 }: PortfolioProjectFormProps) {
   const isEdit = Boolean(editingProject);
   const [visibleGalleryRows, setVisibleGalleryRows] = useState(() =>
-    isEdit ? MAX_GALLERY_ROWS : 1
+    isEdit ? 7 : 1
   );
 
   const showRowControls = !isEdit;
   const canRemoveRow = visibleGalleryRows > 1;
-  const canAddRow = visibleGalleryRows < MAX_GALLERY_ROWS;
+  const canAddRow = visibleGalleryRows < 7;
 
   return (
     <form
       key={editingProject?.id ?? "new"}
       action={saveAction}
-      className={styles.formGrid}
+      className={cms.formGrid}
       onReset={() => {
         if (!isEdit) setVisibleGalleryRows(1);
       }}
     >
       <input type="hidden" name="id" defaultValue={editingProject?.id ?? ""} />
 
-      <div className={styles.formRow}>
-        <div className={styles.field}>
+      <div className={`${cms.formRow} ${cms.formRow3}`}>
+        <div className={cms.field}>
           <Label htmlFor="title">Title</Label>
           <Input
             id="title"
@@ -56,7 +55,7 @@ export default function PortfolioProjectForm({
             required
           />
         </div>
-        <div className={styles.field}>
+        <div className={cms.field}>
           <Label htmlFor="category">Category</Label>
           <Input
             id="category"
@@ -65,12 +64,12 @@ export default function PortfolioProjectForm({
             required
           />
         </div>
-        <div className={styles.field}>
+        <div className={cms.field}>
           <Label htmlFor="service_slug">Service</Label>
           <select
             id="service_slug"
             name="service_slug"
-            className={styles.select}
+            className={cms.select}
             defaultValue={
               (editingProject?.service_slug as ServiceSlug | undefined) ?? "akaalabs"
             }
@@ -85,7 +84,7 @@ export default function PortfolioProjectForm({
         </div>
       </div>
 
-      <p className={styles.galleryHeading}>Deep Dive Gallery</p>
+      <p className={cms.sectionLabel}>Deep Dive Gallery</p>
 
       {Array.from({ length: visibleGalleryRows }, (_, index) => index + 1).map((i) => {
         const enteringNewRow = !isEdit && i === visibleGalleryRows && i >= 2;
@@ -98,7 +97,7 @@ export default function PortfolioProjectForm({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className={styles.mediaField}>
+            <div className={cms.mediaField}>
               <MediaSourceInput
                 key={`${editingProject?.id ?? "new"}-image-${i}`}
                 label={`Image ${i} (URL or Upload)`}
@@ -111,7 +110,7 @@ export default function PortfolioProjectForm({
                 required={i === 1 && !isEdit}
               />
             </div>
-            <div className={styles.field}>
+            <div className={cms.field}>
               <Label htmlFor={`desc_${i}`}>{`Description ${i}`}</Label>
               <Input
                 id={`desc_${i}`}
@@ -126,12 +125,12 @@ export default function PortfolioProjectForm({
         );
       })}
 
-      <div className={styles.actions}>
+      <div className={cms.actions}>
         <Button type="submit">
           {editingProject ? "Update Project" : "Create Project"}
         </Button>
         <Button type="reset" variant="outline">
-          Clear Fields
+          Clear
         </Button>
         {showRowControls ? (
           <div
@@ -144,17 +143,13 @@ export default function PortfolioProjectForm({
               className={styles.galleryRowIconBtn}
               disabled={!canRemoveRow}
               aria-label="Remove last gallery row"
-              title={!canRemoveRow ? "At least one gallery row is required" : "Remove last row"}
-              onClick={() =>
-                setVisibleGalleryRows((n) => Math.max(n - 1, 1))
-              }
+              onClick={() => setVisibleGalleryRows((n) => Math.max(n - 1, 1))}
             >
               <Minus strokeWidth={2.25} size={18} aria-hidden />
             </button>
             <div className={styles.galleryRowToolbarMid}>
-              {/* <span className={styles.galleryRowToolbarLabel}>Add / delete row</span> */}
               <span className={styles.galleryRowToolbarMeta} aria-live="polite">
-                {visibleGalleryRows} / {MAX_GALLERY_ROWS}
+                {visibleGalleryRows} / 7
               </span>
             </div>
             <button
@@ -162,10 +157,7 @@ export default function PortfolioProjectForm({
               className={styles.galleryRowIconBtn}
               disabled={!canAddRow}
               aria-label="Add gallery row"
-              title={!canAddRow ? "Maximum of 7 gallery rows" : "Add another row"}
-              onClick={() =>
-                setVisibleGalleryRows((n) => Math.min(n + 1, MAX_GALLERY_ROWS))
-              }
+              onClick={() => setVisibleGalleryRows((n) => Math.min(n + 1, 7))}
             >
               <Plus strokeWidth={2.25} size={18} aria-hidden />
             </button>
@@ -174,7 +166,7 @@ export default function PortfolioProjectForm({
         {editingProject ? (
           <Link href="/admin/portofolio">
             <Button type="button" variant="ghost">
-              Cancel Edit
+              Cancel
             </Button>
           </Link>
         ) : null}

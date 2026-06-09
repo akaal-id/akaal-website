@@ -20,7 +20,7 @@
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
-  color: #555;
+  color: hsl(var(--muted-foreground));
   text-transform: uppercase;
   letter-spacing: 0.12em;
   width: 100%;
@@ -34,14 +34,14 @@
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.01em;
-  color: #f4f4f4;
+  color: var(--foreground);
   margin: 0;
 }
 
 /* ── Rows ── */
 
 .rows {
-  border-top: 1px solid #222;
+  border-top: 1px solid var(--dark-grey);
   max-width: 1440px;
   margin: auto;
 }
@@ -53,7 +53,7 @@
   gap: 32px;
   padding: 96px 48px;
   margin: auto;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid var(--dark-grey);
   cursor: pointer;
   overflow: hidden;
   isolation: isolate;
@@ -99,7 +99,24 @@
 }
 
 .row:hover {
-  background: rgb(109 40 217 / 0.03);
+  background: color-mix(in srgb, var(--akaal-purple) 4%, var(--background));
+}
+
+:global([data-theme="light"]) .rowMedia {
+  display: none;
+}
+
+:global([data-theme="light"]) .glow {
+  display: none;
+}
+
+:global([data-theme="light"]) .row:hover,
+:global([data-theme="light"]) .rowActive {
+  background: var(--surface-hover);
+}
+
+:global([data-theme="light"]) .preview {
+  display: none;
 }
 
 .row:hover::after {
@@ -127,7 +144,7 @@
 .number {
   font-family: var(--font-mono);
   font-size: 14px;
-  color: var(--white);
+  color: var(--foreground);
   opacity: 0.4;
   position: relative;
   z-index: 2;
@@ -148,7 +165,7 @@
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.03em;
-  color: var(--white);
+  color: var(--foreground);
   opacity: 0.4;
   transition: opacity 0.4s ease;
   position: relative;
@@ -164,7 +181,7 @@
 .desc {
   font-family: var(--font-mono);
   font-size: 14px;
-  color: #555;
+  color: hsl(var(--muted-foreground));
   letter-spacing: 0.03em;
   position: relative;
   z-index: 2;
@@ -176,12 +193,12 @@
 }
 
 .rowActive .desc {
-  color: #888;
+  color: hsl(var(--muted-foreground));
 }
 
 .arrow {
   font-size: 22px;
-  color: #333;
+  color: var(--text-faint);
   position: relative;
   z-index: 2;
   transition: color 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -208,7 +225,7 @@
   opacity: 0;
   transition: opacity 0.35s ease;
   will-change: transform;
-  box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+  box-shadow: var(--shadow-elevated);
 }
 
 .previewVisible {

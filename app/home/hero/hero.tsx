@@ -192,37 +192,37 @@ export default function Hero() {
                 <Button type="button" variant="simple">
                   About Us
                 </Button>
+                <motion.button
+                  type="button"
+                  className={styles.scrollDown}
+                  initial={reduceMotion ? false : { opacity: 0 }}
+                  animate={reduceMotion ? {} : { opacity: 1 }}
+                  transition={
+                    reduceMotion
+                      ? { duration: 0 }
+                      : { delay: 0.95, duration: 0.5, ease: easeOut }
+                  }
+                  whileHover={
+                    reduceMotion ? undefined : { scale: 1.03, opacity: 0.95 }
+                  }
+                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                >
+                  Scroll Down
+                  <svg
+                    className={`${styles.scrollChevron} ${styles.scrollChevronAnimated}`}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </motion.button>
               </div>
             </div>
-            <motion.button
-              type="button"
-              className={styles.scrollDown}
-              initial={reduceMotion ? false : { opacity: 0 }}
-              animate={reduceMotion ? {} : { opacity: 1 }}
-              transition={
-                reduceMotion
-                  ? { duration: 0 }
-                  : { delay: 0.95, duration: 0.5, ease: easeOut }
-              }
-              whileHover={
-                reduceMotion ? undefined : { scale: 1.03, opacity: 0.95 }
-              }
-              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-            >
-              Scroll Down
-              <svg
-                className={`${styles.scrollChevron} ${styles.scrollChevronAnimated}`}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </motion.button>
           </motion.div>
         </div>
       </section>

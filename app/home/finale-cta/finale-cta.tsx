@@ -207,7 +207,10 @@ export default function FinaleCta() {
       const ry = cry;
 
       ctx2d.lineWidth = 1;
-      ctx2d.strokeStyle = "rgba(255, 255, 255, 0.07)";
+      ctx2d.strokeStyle =
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--canvas-grid-stroke")
+          .trim() || "rgba(255, 255, 255, 0.07)";
       ctx2d.beginPath();
 
       for (let gx = -half; gx <= half; gx++) {

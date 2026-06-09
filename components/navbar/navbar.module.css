@@ -1,10 +1,10 @@
 .logoShadow {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  filter: var(--logo-filter) var(--logo-drop-shadow);
 }
 
 @media (max-width: 768px) {
   .logoShadow {
-    filter: drop-shadow(0 3px 7px rgba(0, 0, 0, 0.28)) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.18));
+    filter: var(--logo-filter) var(--logo-drop-shadow-mobile);
   }
 }
 
@@ -44,9 +44,10 @@
   justify-content: space-between;
   background-color: hsl(var(--card) / 0.8);
   backdrop-filter: blur(20px);
+  border: 1px solid var(--nav-chrome-border);
   border-radius: 4px;
   padding: 0 20px;
-  color: var(--white);
+  color: var(--foreground);
   font-family: var(--font-mono);
   font-size: 16px;
   font-weight: 600;
@@ -103,7 +104,7 @@
   background: var(--purple);
   appearance: none;
   border-radius: 4px;
-  color: var(--white);
+  color: #ffffff;
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 500;
@@ -130,8 +131,9 @@
   border-radius: 4px;
   background-color: hsl(var(--card) / 0.8);
   backdrop-filter: blur(20px);
+  border: 1px solid var(--nav-chrome-border);
   padding: 10px 20px 20px;
-  color: var(--white);
+  color: var(--foreground);
   font-family: var(--font-mono);
   font-size: 16px;
   display: flex;
@@ -151,7 +153,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 0;
-  border-bottom: 1px solid #202020;
+  border-bottom: 1px solid var(--dropdown-divider);
 }
 
 .dropdownRow::after,
@@ -175,7 +177,7 @@
 
 .dropdownSplit {
   gap: 20px;
-  border-bottom: 1px solid #202020;
+  border-bottom: 1px solid var(--dropdown-divider);
 }
 
 .rowIcons {
@@ -192,7 +194,7 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
-  border-bottom: 1px solid #202020;
+  border-bottom: 1px solid var(--dropdown-divider);
 }
 
 .submenuWrap {
@@ -205,8 +207,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 0;
-  border-bottom: 1px solid #202020;
-  color: rgb(244 244 244 / 0.2);
+  border-bottom: 1px solid var(--dropdown-divider);
+  color: var(--text-faint);
   gap: 9px;
 }
 
@@ -217,7 +219,7 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
-  border-bottom: 1px solid #202020;
+  border-bottom: 1px solid var(--dropdown-divider);
 }
 
 .rowArrow {
@@ -233,21 +235,21 @@
 }
 
 .submenuButton .rowArrow {
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .dropdownRowAccent {
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .dropdownMeta {
   display: flex;
   align-items: flex-start;
-  color: rgb(244 244 244 / 0.4);
+  color: var(--text-muted-alpha);
 }
 
 .dropdownMetaItem:hover{
-  color: var(--white);
+  color: var(--foreground);
   transition: color 0.2s ease-in-out;
   transform: scaleX(1);
 }
@@ -274,8 +276,8 @@
   border: 0;
   appearance: none;
   border-radius: 4px;
-  background-color: var(--black);
-  color: var(--white);
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 500;
@@ -308,7 +310,6 @@
   height: 32px;
   width: auto;
   object-fit: contain;
-  filter: grayscale(1) brightness(4);
 }
 
 .iconSm {
@@ -334,7 +335,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--overlay-scrim);
   backdrop-filter: blur(4px);
 }
 
@@ -395,7 +396,7 @@
   padding: 12px 16px;
   border-radius: 8px;
   background-color: #22c55e;
-  color: var(--white);
+  color: var(--foreground);
   font-weight: 600;
   transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);

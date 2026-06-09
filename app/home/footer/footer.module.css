@@ -6,7 +6,7 @@
   z-index: 0;
   height: var(--footer-height);
   background: var(--background);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--border-subtle);
   pointer-events: auto;
   overflow: hidden;
 }
@@ -61,7 +61,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-faint);
   margin: 0 0 20px;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .logoLink:focus-visible {
-  outline: 1px solid rgba(255, 255, 255, 0.4);
+  outline: 1px solid var(--focus-outline);
   outline-offset: 6px;
   border-radius: 4px;
 }
@@ -98,7 +98,7 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--text-faint);
   max-width: 32ch;
 }
 
@@ -109,18 +109,18 @@
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted-alpha);
   text-decoration: none;
   transition: color var(--transition-fast);
   width: fit-content;
 }
 
 .navLink:hover {
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .navLink:focus-visible {
-  outline: 1px solid rgba(255, 255, 255, 0.4);
+  outline: 1px solid var(--focus-outline);
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -132,7 +132,7 @@
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted-alpha);
   text-decoration: none;
   transition: color var(--transition-fast);
   width: fit-content;
@@ -143,7 +143,7 @@
 }
 
 .socialLink:focus-visible {
-  outline: 1px solid rgba(255, 255, 255, 0.4);
+  outline: 1px solid var(--focus-outline);
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -155,7 +155,7 @@
   align-items: center;
   justify-content: space-between;
   padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .copyright {
@@ -164,7 +164,7 @@
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--text-faint);
 }
 
 .backToTop {
@@ -178,17 +178,17 @@
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--text-faint);
   cursor: pointer;
   transition: color var(--transition-fast);
 }
 
 .backToTop:hover {
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .backToTop:focus-visible {
-  outline: 1px solid rgba(255, 255, 255, 0.4);
+  outline: 1px solid var(--focus-outline);
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -209,7 +209,7 @@
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--text-faint);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
@@ -219,7 +219,7 @@
 }
 
 .email:focus-visible {
-  outline: 1px solid rgba(255, 255, 255, 0.4);
+  outline: 1px solid var(--focus-outline);
   outline-offset: 4px;
   border-radius: 2px;
 }

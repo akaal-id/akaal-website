@@ -1,21 +1,16 @@
 /**
- * Floater — fixed circular button with scroll progress ring (dark theme).
+ * Floater — fixed circular buttons with scroll progress ring (theme-aware).
  * Chevron down at top; chevron up + scroll-to-top when scrolled.
  */
 
-.floater {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 50;
+.floaterButton {
+  position: relative;
   width: 56px;
   height: 56px;
   border-radius: 50%;
   border: 1px solid hsl(var(--border));
   background: var(--dark-grey);
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.45),
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  box-shadow: var(--shadow-elevated), var(--shadow-inset);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -24,19 +19,20 @@
   transition:
     transform var(--transition-fast),
     box-shadow var(--transition-fast),
-    border-color var(--transition-fast);
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
-.floater:hover {
+.floaterButton:hover {
   transform: scale(1.05);
-  border-color: rgba(138, 43, 226, 0.45);
+  border-color: var(--glow-purple-border);
   box-shadow:
-    0 6px 24px rgba(0, 0, 0, 0.55),
-    0 0 20px rgba(138, 43, 226, 0.18),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+    var(--shadow-elevated-hover),
+    0 0 20px var(--glow-purple),
+    var(--shadow-inset-hover);
 }
 
-.floater:active {
+.floaterButton:active {
   transform: scale(0.98);
 }
 
@@ -79,9 +75,7 @@
 }
 
 @media (max-width: 640px) {
-  .floater {
-    bottom: max(16px, env(safe-area-inset-bottom, 0px));
-    right: max(16px, env(safe-area-inset-right, 0px));
+  .floaterButton {
     width: 48px;
     height: 48px;
   }

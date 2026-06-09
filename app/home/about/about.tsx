@@ -13,6 +13,8 @@ import {
   buildAboutStatementInnerHTML,
 } from "@/content/about";
 import styles from "./about.module.css";
+import { useTheme } from "@/components/theme/theme-provider";
+import { getWordScrubColors } from "@/lib/theme/word-scrub";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +23,7 @@ const PILLAR_ICONS = [Crown, Megaphone, Heart, TrendingUp] as const;
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const el = textRef.current;
@@ -30,10 +33,13 @@ export default function About() {
     el.innerHTML = buildAboutStatementInnerHTML(styles.word, styles.emphasisWord);
 
     const wordEls = el.querySelectorAll<HTMLSpanElement>(`.${styles.word}`);
-    gsap.set(wordEls, { color: "#222" });
+    const { start, end } = getWordScrubColors();
+    if (!start || !end) return;
+
+    gsap.set(wordEls, { color: start });
 
     const tween = gsap.to(wordEls, {
-      color: "#c4c4c4",
+      color: end,
       stagger: 0.04,
       scrollTrigger: {
         trigger: section,
@@ -66,13 +72,16 @@ export default function About() {
       },
     });
 
+    ScrollTrigger.refresh();
+
     return () => {
+      gsap.set(wordEls, { clearProps: "color" });
       tween.scrollTrigger?.kill();
       tween.kill();
       cardsTween.scrollTrigger?.kill();
       cardsTween.kill();
     };
-  }, []);
+  }, [theme]);
 
   return (
     <section ref={sectionRef} className={styles.about} aria-label="About">

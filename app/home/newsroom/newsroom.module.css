@@ -26,7 +26,7 @@
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
-  color: #555;
+  color: hsl(var(--muted-foreground));
   text-transform: uppercase;
   letter-spacing: 0.12em;
   width: 100%;
@@ -40,7 +40,7 @@
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.01em;
-  color: #f4f4f4;
+  color: var(--foreground);
   margin: 0;
 }
 
@@ -56,7 +56,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-muted);
   background: var(--background);
   text-decoration: none;
   color: inherit;
@@ -73,7 +73,7 @@
 
 .cardCta:hover {
   border-color: var(--purple);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-hover);
 }
 
 .ctaInner {
@@ -90,18 +90,18 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted-alpha);
   transition: color 0.4s ease;
 }
 
 .cardCta:hover .ctaText {
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .ctaArrow {
   width: 20px;
   height: 20px;
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-faint);
   rotate: -45deg;
   transition:
     color 0.4s ease,

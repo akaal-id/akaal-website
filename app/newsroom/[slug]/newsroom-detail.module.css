@@ -5,7 +5,7 @@
   z-index: 1;
   min-height: 100svh;
   background: var(--background);
-  color: var(--white);
+  color: var(--foreground);
   margin-bottom: var(--footer-height);
   padding: clamp(7rem, 12vw, 9rem) var(--container-pad-x) clamp(4rem, 8vw, 6rem);
   overflow: hidden;
@@ -17,8 +17,8 @@
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(to right, rgb(255 255 255 / 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
@@ -52,7 +52,7 @@
 
 .backLink:hover,
 .footerLink:hover {
-  color: var(--white);
+  color: var(--foreground);
 }
 
 /* ── Header ── */
@@ -71,8 +71,8 @@
   width: fit-content;
   padding: 8px 14px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   font-family: var(--font-mono);
@@ -91,7 +91,7 @@
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--text-faint);
 }
 
 .title {
@@ -101,7 +101,7 @@
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  color: var(--white);
+  color: var(--foreground);
 }
 
 /* ── Image ── */
@@ -112,7 +112,7 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
 }
 
 .imageWrap img {
@@ -128,8 +128,8 @@
 .bodyGlass {
   padding: clamp(1.5rem, 4vw, 2.5rem);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
@@ -138,7 +138,7 @@
   font-family: var(--font-serif);
   font-size: clamp(1rem, 1.3vw, 1.1rem);
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--text-body);
   text-align: justify;
 }
 
@@ -157,7 +157,7 @@
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.02em;
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .richText :global(h2) {
@@ -177,12 +177,12 @@
 .richText :global(blockquote) {
   margin: 1.5rem 0;
   padding: 1rem 0 1rem 1.25rem;
-  border-left: 2px solid rgba(255, 255, 255, 0.15);
+  border-left: 2px solid var(--border-strong);
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 2vw, 1.35rem);
   font-weight: 500;
   line-height: 1.4;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-emphasis);
 }
 
 .richText :global(ul),
@@ -202,7 +202,7 @@
 .richText :global(hr) {
   border: 0;
   height: 1px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--glass-border);
   margin: 2rem 0;
 }
 
@@ -221,7 +221,7 @@
   max-width: 1080px;
   margin: clamp(3.5rem, 8vw, 5rem) auto 0;
   padding-top: clamp(2rem, 5vw, 3rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -242,7 +242,7 @@
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .relatedGrid {
@@ -271,7 +271,7 @@
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
-  color: rgba(255, 255, 255, 0.06);
+  color: var(--border-subtle);
 }
 
 .notFoundText {
@@ -293,13 +293,13 @@
   color: var(--teal);
   text-decoration: none;
   padding: 10px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-muted);
   border-radius: 8px;
   transition: border-color 0.2s ease;
 }
 
 .notFoundLink:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: var(--text-faint);
 }
 
 @media (max-width: 767px) {

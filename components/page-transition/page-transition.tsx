@@ -51,7 +51,7 @@ export default function PageTransition() {
 
     grid.appendChild(fragment);
     cellsRef.current = cells;
-    gsap.set(cells, { opacity: 0, scale: 0, backgroundColor: "#0a0a0a" });
+    gsap.set(cells, { opacity: 0, scale: 0 });
   };
 
   const revealOverlay = () => {

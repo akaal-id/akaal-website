@@ -58,7 +58,7 @@
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .headerLead {
@@ -66,14 +66,14 @@
   font-family: var(--font-serif);
   font-size: clamp(15px, 1.25vw, 17px);
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted-alpha);
 }
 
 .progressTrack {
   margin-top: clamp(28px, 4vw, 40px);
   height: 2px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--border-subtle);
   overflow: hidden;
 }
 
@@ -108,7 +108,7 @@
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--text-faint);
 }
 
 .phaseDot {
@@ -120,7 +120,7 @@
 }
 
 .phaseNum {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted-alpha);
 }
 
 /* ── Grid ── */
@@ -137,15 +137,12 @@
   border-radius: 0px;
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.01) 48%,
-    rgba(0, 0, 0, 0.15) 100%
+    var(--surface-card) 0%,
+    var(--card-gradient-mid) 48%,
+    var(--card-gradient-end) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  /* 0 0 0 1px rgba(0, 0, 0, 0.35) */
-  box-shadow:
-     inset,
-    0 24px 48px -32px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-elevated);
   transition:
     border-color 0.4s var(--transition-smooth),
     transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
@@ -153,11 +150,11 @@
 }
 
 .card:hover {
-  border-color: color-mix(in srgb, var(--akaal-purple) 35%, rgba(255, 255, 255, 0.08));
+  border-color: color-mix(in srgb, var(--akaal-purple) 35%, var(--glass-border));
   transform: translateY(-4px);
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--akaal-purple) 22%, transparent) inset,
-    0 32px 64px -28px rgba(0, 0, 0, 0.55),
+    var(--shadow-elevated-hover),
     0 0 48px -20px color-mix(in srgb, var(--akaal-purple) 25%, transparent);
 }
 
@@ -176,14 +173,14 @@
   font-weight: 200;
   line-height: 0.85;
   letter-spacing: -0.04em;
-  color: rgba(255, 255, 255, 0.06);
+  color: var(--border-subtle);
   user-select: none;
   transition: color 0.45s ease;
   margin-bottom: 72px;
 }
 
 .card:hover .cardIndex {
-  color: color-mix(in srgb, var(--akaal-purple) 22%, rgba(255, 255, 255, 0.06));
+  color: color-mix(in srgb, var(--akaal-purple) 22%, var(--border-subtle));
 }
 
 .cardPhase {
@@ -192,7 +189,7 @@
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.28);
+  color: var(--text-faint);
   white-space: nowrap;
 }
 
@@ -203,7 +200,7 @@
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .cardBody {
@@ -211,13 +208,29 @@
   font-family: var(--font-serif);
   font-size: clamp(14px, 1.1vw, 16px);
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.42);
+  color: var(--text-muted-alpha);
   max-width: 52ch;
   transition: color 0.4s ease;
 }
 
 .card:hover .cardBody {
-  color: rgba(255, 255, 255, 0.58);
+  color: var(--text-subtle);
+}
+
+:global([data-theme="light"]) .glow {
+  opacity: 0.45;
+}
+
+:global([data-theme="light"]) .card {
+  background: var(--surface-card);
+  box-shadow: var(--shadow-inset);
+}
+
+:global([data-theme="light"]) .card:hover {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--akaal-purple) 18%, transparent) inset,
+    var(--shadow-elevated-hover),
+    0 0 32px -16px color-mix(in srgb, var(--akaal-purple) 16%, transparent);
 }
 
 /* Connector hint between cards (desktop) */

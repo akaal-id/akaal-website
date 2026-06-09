@@ -16,7 +16,7 @@
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   margin: 24px auto;
@@ -25,7 +25,7 @@
 .visionBlock {
   padding: var(--section-pad-y) var(--container-pad-x);
   gap: 48px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,9 +43,9 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(5, 5, 5, 0.78) 0%,
-    rgba(5, 5, 5, 0.56) 45%,
-    rgba(5, 5, 5, 0.7) 100%
+    color-mix(in srgb, var(--background) 78%, transparent) 0%,
+    color-mix(in srgb, var(--background) 56%, transparent) 45%,
+    color-mix(in srgb, var(--background) 70%, transparent) 100%
   );
   z-index: 0;
 }
@@ -60,7 +60,7 @@
   max-width: 1200px;
   margin: clamp(8px, 2vw, 24px) auto 0;
   padding-top: clamp(32px, 5vw, 56px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-muted);
 }
 
 .missionInVision .labelMission {
@@ -87,25 +87,25 @@
 /* Row 1: three equal cards */
 .missionCard:nth-child(1) {
   grid-column: 1 / span 2;
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-right: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
 }
 
 .missionCard:nth-child(2) {
   grid-column: 3 / span 2;
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-right: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
 }
 
 .missionCard:nth-child(3) {
   grid-column: 5 / span 2;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid var(--border-strong);
 }
 
 /* Row 2: two cards centered (columns 2–3 and 4–5) */
 .missionCard:nth-child(4) {
   grid-column: 2 / span 2;
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  border-right: 1px solid var(--border-strong);
 }
 
 .missionCard:nth-child(5) {
@@ -116,7 +116,7 @@
   padding: clamp(32px, 2.4vw, 36px);
   transition: background-color 220ms ease, transform 220ms ease;
   /* border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04); */
+  background: var(--surface-card); */
   backdrop-filter: blur(8px);
 }
 
@@ -127,7 +127,7 @@
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.02em;
-  color: var(--white);
+  color: var(--foreground);
   text-align: center;
   transition: color 220ms ease;
 }
@@ -137,19 +137,19 @@
   font-family: "Inter", sans-serif;
   font-size: clamp(14px, 1.15vw, 15px);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-body);
   text-align: center;
   transition: color 220ms ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .missionCard:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--surface-card);
     transform: translateY(-2px);
   }
 
   .missionCard:hover .missionCardBody {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-emphasis);
   }
 }
 
@@ -192,6 +192,20 @@
   filter: blur(24px);
 }
 
+:global([data-theme="light"]) .pullquoteGlow,
+:global([data-theme="light"]) .pullquoteGlo {
+  opacity: 0.08;
+}
+
+:global([data-theme="light"]) .visionBlock {
+  background-image: none !important;
+  background-color: var(--background);
+}
+
+:global([data-theme="light"]) .visionBlock::after {
+  background: var(--background);
+}
+
 .pullquote {
   position: relative;
   margin: 0;
@@ -213,7 +227,7 @@
   font-weight: 500;
   line-height: 1.28;
   letter-spacing: -0.04em;
-  color: var(--white);
+  color: var(--foreground);
   max-width: 29ch;
 }
 
@@ -224,7 +238,7 @@
   font-weight: 500;
   line-height: 1.28;
   letter-spacing: -0.04em;
-  color: var(--white);
+  color: var(--foreground);
   max-width: 36ch;
 
   text-align: right;
@@ -250,7 +264,7 @@
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   margin: 24px auto;
@@ -269,7 +283,7 @@
   font-weight: 400;
   line-height: 1.35;
   letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-body);
   max-width: 48ch;
 }
 
@@ -277,17 +291,17 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-muted);
 }
 
 .missionRow {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-muted);
   transition: background-color 280ms ease, border-left-color 280ms ease;
   border-left: 2px solid transparent;
 }
 
 .missionRowActive {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--surface-card);
   border-left-color: var(--akaal-purple);
 }
 
@@ -309,7 +323,7 @@
   margin-top: 1px;
   font-family: var(--font-mono);
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted-alpha);
   letter-spacing: 0.1em;
 }
 
@@ -320,12 +334,12 @@
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted-alpha);
   transition: color 280ms ease;
 }
 
 .missionRowActive .missionTitle {
-  color: var(--white);
+  color: var(--foreground);
 }
 
 .missionBody {
@@ -349,7 +363,7 @@
   font-family: "Inter", sans-serif;
   font-size: clamp(14px, 1.1vw, 16px);
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.76);
+  color: var(--text-body);
   max-width: 72ch;
 }
 
@@ -394,12 +408,12 @@
 
   .missionCard:nth-child(4) {
     grid-column: 1 / span 2;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid var(--border-strong);
   }
 
   .missionCard:nth-child(5) {
     grid-column: 3 / span 2;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid var(--border-strong);
   }
 }
 
@@ -448,7 +462,7 @@
     border-top: none;
     border-right: none;
     border-left: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid var(--border-strong);
   }
 
   .missionCardTitle, .missionCardBody{
