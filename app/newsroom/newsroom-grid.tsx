@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLenis } from "lenis/react";
 import NewsroomCard from "@/components/newsroomCard";
 import Pagination from "@/components/pagination";
 import type { NewsroomListItem } from "@/content/newsroom";
@@ -15,6 +16,7 @@ type NewsroomGridProps = {
 };
 
 export default function NewsroomGrid({ items }: NewsroomGridProps) {
+  const lenis = useLenis();
   const sectionRef = useRef<HTMLElement>(null);
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
@@ -58,7 +60,13 @@ export default function NewsroomGrid({ items }: NewsroomGridProps) {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const section = sectionRef.current;
+    if (!section) return;
+    if (lenis) {
+      lenis.scrollTo(section);
+      return;
+    }
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (

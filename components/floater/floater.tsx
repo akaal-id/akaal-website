@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { useLenis } from "lenis/react";
 import { ChevronDown } from "lucide-react";
 import styles from "./floater.module.css";
 
@@ -15,48 +16,62 @@ const LERP_FACTOR = 0.12;
 
 export default function Floater() {
   const pathname = usePathname();
+  const lenis = useLenis();
   const isAdminRoute =
     pathname.startsWith("/admin") || pathname.startsWith("/app/admin");
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [displayProgress, setDisplayProgress] = useState(0);
-  const rafRef = useRef<number | null>(null);
   const latestRef = useRef({ scrollY: 0, maxScroll: 0 });
   const displayProgressRef = useRef(0);
   const isScrolledRef = useRef(false);
 
   useEffect(() => {
-    const update = () => {
+    const updateFromScroll = (scrollY: number, maxScroll: number) => {
+      latestRef.current = { scrollY, maxScroll };
+
+      let nextScrolled = isScrolledRef.current;
+      if (scrollY < SCROLL_AT_TOP) nextScrolled = false;
+      else if (scrollY > SCROLL_LEAVE_TOP) nextScrolled = true;
+
+      if (nextScrolled !== isScrolledRef.current) {
+        isScrolledRef.current = nextScrolled;
+        setIsScrolled(nextScrolled);
+      }
+    };
+
+    const updateFromWindow = () => {
       const scrollY = window.scrollY;
       const maxScroll =
         document.documentElement.scrollHeight - window.innerHeight;
-      latestRef.current = { scrollY, maxScroll };
-
-      if (rafRef.current != null) return;
-      rafRef.current = requestAnimationFrame(() => {
-        rafRef.current = null;
-        const sy = latestRef.current.scrollY;
-
-        let nextScrolled = isScrolledRef.current;
-        if (sy < SCROLL_AT_TOP) nextScrolled = false;
-        else if (sy > SCROLL_LEAVE_TOP) nextScrolled = true;
-
-        if (nextScrolled !== isScrolledRef.current) {
-          isScrolledRef.current = nextScrolled;
-          setIsScrolled(nextScrolled);
-        }
-      });
+      updateFromScroll(scrollY, maxScroll);
     };
 
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    if (lenis) {
+      const onLenisScroll = (instance: NonNullable<typeof lenis>) => {
+        updateFromScroll(instance.scroll, instance.limit);
+      };
+
+      onLenisScroll(lenis);
+      lenis.on("scroll", onLenisScroll);
+
+      const onResize = () => onLenisScroll(lenis);
+      window.addEventListener("resize", onResize);
+
+      return () => {
+        lenis.off("scroll", onLenisScroll);
+        window.removeEventListener("resize", onResize);
+      };
+    }
+
+    updateFromWindow();
+    window.addEventListener("scroll", updateFromWindow, { passive: true });
+    window.addEventListener("resize", updateFromWindow);
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("scroll", updateFromWindow);
+      window.removeEventListener("resize", updateFromWindow);
     };
-  }, []);
+  }, [lenis]);
 
   useEffect(() => {
     let rafId: number;
@@ -89,6 +104,10 @@ export default function Floater() {
 
   const handleClick = () => {
     if (!isScrolled) return;
+    if (lenis) {
+      lenis.scrollTo(0);
+      return;
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

@@ -8,7 +8,6 @@ import Projects from "./projects/projects";
 import Newsroom from "./newsroom";
 import Marquee from "./marquee";
 import FinaleCta from "./finale-cta";
-import Footer from "./footer";
 import styles from "./home.module.css";
 
 export default async function HomePage() {
@@ -31,7 +30,6 @@ export default async function HomePage() {
         <Marquee />
         <FinaleCta />
       </main>
-      <Footer />
     </>
   );
 }

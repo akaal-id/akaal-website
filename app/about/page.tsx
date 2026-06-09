@@ -1,4 +1,3 @@
-import Footer from "@/app/home/footer/footer";
 import FinaleCta from "@/app/home/finale-cta";
 import homeStyles from "@/app/home/home.module.css";
 import Hero from "./hero/hero";
@@ -20,7 +19,6 @@ export default function AboutPage() {
         
         <FinaleCta />
       </main>
-      <Footer />
     </>
   );
 }

@@ -8,7 +8,7 @@
   /* Deep Akaal blue — foundational glows / footer artifact */
   --deep-blue: #14043b;
   /* Fixed footer + main spacer — curtain reveal (keep in sync) */
-  --footer-height: 308px;
+  --footer-height: 360px;
   --white: #f7f7f7  ;
   --black: #050505;
   --dark-grey: #101010;
@@ -36,7 +36,7 @@
 
 @media (max-width: 1023px) {
   :root {
-    --footer-height: 360px;
+    --footer-height: 480px;
     --container-pad-x: var(--container-pad-x-tablet);
     --section-pad-y: var(--section-pad-y-tablet);
   }
@@ -44,7 +44,7 @@
 
 @media (max-width: 767px) {
   :root {
-    --footer-height: 440px;
+    --footer-height: 620px;
     --container-pad-x: var(--container-pad-x-mobile);
     --section-pad-y: var(--section-pad-y-mobile);
   }

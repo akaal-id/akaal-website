@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLenis } from "lenis/react";
 import projectStyles from "@/app/home/projects/projects.module.css";
 import Pagination from "@/components/pagination";
 import {
@@ -18,6 +19,7 @@ type PortfolioGridProps = {
 };
 
 export default function PortfolioGrid({ projects }: PortfolioGridProps) {
+  const lenis = useLenis();
   const sectionRef = useRef<HTMLElement>(null);
   const [search, setSearch] = useState("");
   const [activeService, setActiveService] =
@@ -57,7 +59,13 @@ export default function PortfolioGrid({ projects }: PortfolioGridProps) {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const section = sectionRef.current;
+    if (!section) return;
+    if (lenis) {
+      lenis.scrollTo(section);
+      return;
+    }
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
